@@ -105,7 +105,7 @@ double TemperatureData::GetTemperatureInKelvin()
 		return _temperature - celciusKelvinDifference;
 		break;
 	case Fahrenheit:
-		return ((_temperature - 32) * 5/9) - celciusKelvinDifference;
+		return ((_temperature - 32) * 5/9) + celciusKelvinDifference;
 		break;
 	case Invalid:
 	default:
@@ -119,7 +119,7 @@ double TemperatureData::GetTemperatureInCelcius()
 	switch(_scale)
 	{
 	case Kelvin:
-		return _temperature + celciusKelvinDifference;
+		return _temperature - celciusKelvinDifference;
 		break;
 	case Celsius:
 		return _temperature;
@@ -139,7 +139,7 @@ double TemperatureData::GetTemperatureInFahrenheit()
 	switch(_scale)
 	{
 	case Kelvin:
-		return ((_temperature * 9/5) + 32) + celciusKelvinDifference;
+		return (((_temperature - celciusKelvinDifference) * 9/5) + 32);
 		break;
 	case Celsius:
 		return (_temperature * 9/5) + 32;
