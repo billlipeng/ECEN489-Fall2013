@@ -4,7 +4,7 @@
  *  Created on: Aug 31, 2013
  *      Author: Zachary Partal
  */
-/*
+
 #include <iostream>
 #include <string>
 #include "TemperatureData.h"
@@ -28,4 +28,3 @@ int main() {
 
 	return 0;
 }
-*/
