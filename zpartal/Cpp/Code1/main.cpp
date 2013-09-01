@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
 
-	cout << "Enter two numbers seperarated by a space and press enter";
+	cout << "Enter two numbers seperarated by a space and press enter" << endl << ">> ";
 	int a = 0;
 	int b = 0;
 	cin >> a >> b;
