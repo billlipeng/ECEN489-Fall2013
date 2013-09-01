@@ -1,0 +1,68 @@
+03:09:55 **** Rebuild of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code21.exe "src\\TemperatureData.o" 
+c:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/ld.exe: cannot open output file Code21.exe: Permission denied
+collect2.exe: ´íÎó£ºld ·µ»Ø 1
+Info: Nothing to build for Code21
+03:10:40 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code21.exe "src\\TemperatureData.o" 
+Info: Nothing to build for Code21
+03:12:03 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code21.exe "src\\TemperatureData.o" 
+c:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/ld.exe: cannot open output file Code21.exe: Permission denied
+collect2.exe: ´íÎó£ºld ·µ»Ø 1
+03:12:07 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -o Code21.exe "src\\TemperatureData.o" 
+c:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/ld.exe: cannot open output file Code21.exe: Permission denied
+collect2.exe: ´íÎó£ºld ·µ»Ø 1
+03:12:32 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -o Code21.exe "src\\TemperatureData.o" 
+Info: Nothing to build for Code21
+03:14:21 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code21.exe "src\\TemperatureData.o" 
+Info: Nothing to build for Code21
+03:16:16 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code21.exe "src\\TemperatureData.o" 
+c:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/ld.exe: cannot open output file Code21.exe: Permission denied
+collect2.exe: ´íÎó£ºld ·µ»Ø 1
+03:16:20 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -o Code21.exe "src\\TemperatureData.o" 
+c:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/ld.exe: cannot open output file Code21.exe: Permission denied
+collect2.exe: ´íÎó£ºld ·µ»Ø 1
+03:16:42 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -o Code21.exe "src\\TemperatureData.o" 
+Info: Nothing to build for Code21
+03:20:21 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code21.exe "src\\TemperatureData.o" 
+c:/mingw/bin/../lib/gcc/mingw32/4.7.2/../../../../mingw32/bin/ld.exe: cannot open output file Code21.exe: Permission denied
+collect2.exe: ´íÎó£ºld ·µ»Ø 1
+03:20:39 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -o Code21.exe "src\\TemperatureData.o" 
+Info: Nothing to build for Code21
+03:23:21 **** Incremental Build of configuration Debug for project Code21 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code21.exe "src\\TemperatureData.o" 
+Info: Nothing to build for Code21
+03:30:32 **** Rebuild of configuration Debug for project Code2 ****
+Info: Internal Builder is used for build
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TemperatureData.o" "..\\src\\TemperatureData.cpp" 
+g++ -o Code2.exe "src\\TemperatureData.o" 
+Info: Nothing to build for Code2
+Info: Nothing to build for Code2
