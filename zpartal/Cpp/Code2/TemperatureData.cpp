@@ -24,6 +24,7 @@ ConvertedTemps temp_conv(string s, double t) {
 		temps.c = temps.k - 273.15;
 		temps.f = (temps.k * (9.0/5.0)) - 459.67;
 	}
+	// Possibly throw exception
 	else {
 		cout << "Temperature is an invalid scale";
 	}
