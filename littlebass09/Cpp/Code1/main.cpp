@@ -29,6 +29,4 @@ int main()
 	cout<<"POOF!"<<endl
 		<<number1<<" + "<<number2<<" = "<< number1 + number2<<endl<<endl;
 
-	char a;
-	cin>>a;
 }
