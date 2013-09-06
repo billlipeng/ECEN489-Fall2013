@@ -15,7 +15,9 @@
 
 #include <array>
 #include <iostream>
+#include <limits>
 #include <string>
+#include <tuple>
 #include <vector>
 
 #include "mismatch.hh"
@@ -38,14 +40,15 @@ int main(int argc, char **argv)
     bool arg_help = false;
     bool arg_statistics = false;
 
-    for(int cur_arg = 0; cur_arg < argc; ++cur_arg)
+    // Start processing args at index 1, because 
+    for(int cur_arg = 1; cur_arg < argc; ++cur_arg)
     {
         std::string cur_arg_string(argv[cur_arg]);
         
         // Detect an option.
         if(cur_arg_string[0] == '-')
         {
-            std::string::const_iterator text_begin = begin(cur_arg_string);
+            std::string::iterator text_begin = begin(cur_arg_string);
 
             // Munch any leading hyphens.
             while(text_begin != end(cur_arg_string) && (*text_begin) == '-')
@@ -61,7 +64,7 @@ int main(int argc, char **argv)
 
             // Check the argument text against the arguments we accept
             // (currently, only "help" and "statistics").
-            string help_string("help");
+            std::string help_string("help");
             auto help_differing_pair = cpp14_compat::mismatch(
                     text_begin,
                     end(cur_arg_string), 
@@ -69,7 +72,7 @@ int main(int argc, char **argv)
                     end(help_string)
             );
 
-            string statistics_string("statistics");
+            std::string statistics_string("statistics");
             auto statistics_differing_pair = cpp14_compat::mismatch(
                 text_begin,
                 end(cur_arg_string),
@@ -80,11 +83,11 @@ int main(int argc, char **argv)
             // If the mismatch occured at the first character of the
             // user-supplied text, then it's not a match.  Otherwise, it is (we
             // don't worry about possibly conflicting matches).
-            if(get<0>(help_differing_pair) != text_begin)
+            if(std::get<0>(help_differing_pair) != text_begin)
             {
                 arg_help = true;
             }
-            else if(get<0>(statistics_differing_pair) != text_begin)
+            else if(std::get<0>(statistics_differing_pair) != text_begin)
             {
                 arg_statistics = true;
             }
@@ -101,7 +104,7 @@ int main(int argc, char **argv)
             // This token is a positional option.
 
             // Make sure we haven't already received enough positional options.
-            if(cur_positional_option >= expect_positionals)
+            if(cur_positional >= expect_positionals)
             {
                 std::cerr << "Error: Too many positional options specified."
                           << std::endl;
@@ -129,7 +132,7 @@ int main(int argc, char **argv)
             for(const scale_mapping &check_mapping : accepted_scales)
             {
                 const std::string &check_name = std::get<0>(check_mapping);
-                const std::string &check_scale = std::get<1>(check_mapping);
+                const scale_type &check_scale = std::get<1>(check_mapping);
 
                 auto differing_pair = cpp14_compat::mismatch(
                     begin(cur_arg_string),
@@ -141,7 +144,7 @@ int main(int argc, char **argv)
                 // If the user-supplied text and the text to check against
                 // differ after the first character, then we assume that was the
                 // correct option.
-                if(get<0>(differing_pair) != begin(cur_arg_string))
+                if(std::get<0>(differing_pair) != begin(cur_arg_string))
                 {
                     cur_scale = check_scale;
                     existing_scale_was_specified = true;
@@ -157,20 +160,28 @@ int main(int argc, char **argv)
                 goto process_args_end;
             }
 
-            if(cur_positional_option == 0)
+            if(cur_positional == 0)
             {
                 source_scale = cur_scale;
             }
-            else if(cur_positional_option == 1)
+            else if(cur_positional == 1)
             {
                 target_scale = cur_scale;
             }
 
-            ++cur_positional_option;
+            ++cur_positional;
         }
             
     }
  process_args_end:
+
+    // Check to make sure that we got two positional options.
+    if(cur_positional != 2)
+    {
+        std::cerr << "Error: You must specify both a source and target scale."
+                  << std::endl;
+        arg_help = true;
+    }
 
     // Check to see if we need to print help text, wither from --help argument
     // or from error.
@@ -193,11 +204,17 @@ int main(int argc, char **argv)
     // Now we have a source scale and a target scale.  We need to read input
     // temperatures until EOF, outputing their converted equivalents.
     size_t processed_records = 0;
-    while(cin)
+    while(std::cin)
     {
         double input_temp = std::numeric_limits<double>::signaling_NaN();
-        cin >> input_temp;
-        
+        std::cin >> input_temp;
+
+        // Check to see if input stream has closed or we have had a read error.
+        if(! std::cin)
+        {
+            break;
+        }        
+
         double celsius_equiv = std::numeric_limits<double>::signaling_NaN();
 
         if(source_scale == scale_type::celsius)
@@ -233,7 +250,7 @@ int main(int argc, char **argv)
         ++processed_records;
     }
     
-    if(! cin.eof())
+    if(! std::cin.eof())
     {
         std::cerr << "Error: Malformed input record "
                   << (processed_records - 1) << std::endl;
