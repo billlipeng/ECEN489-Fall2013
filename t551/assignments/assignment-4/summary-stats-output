@@ -1,0 +1,5 @@
+./summary-stats < pi_digits
+Sample Mean:	4.71429
+Unbiased Sample Variance:	8.59066
+Sample Median: 4
+Sample Mode: 9

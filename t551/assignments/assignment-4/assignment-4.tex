@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\usepackage{minted}
+
+\begin{document}
+\textbf{\Large ECEN 489: Assignment 4}
+
+\noindent\rule{\textwidth}{0.4pt}\\
+Student Name: Taahir Ahmed\\
+Student UIN: 119004623\\
+\noindent\rule{\textwidth}{0.4pt}\\
+Grader Name:\\
+Grader UIN:\\
+\noindent\rule{\textwidth}{0.4pt}\\
+
+\section*{True or False}
+\begin{enumerate}
+  \item \textbf{0.5 pt} -- A same symbol can denote both a unary operator and a
+    binary operator.
+
+    True.
+
+  \item \textbf{0.5 pt} -- A compile-time warning is always given when an
+    overflow exception occurs.
+
+    False.
+\end{enumerate}
+
+\section*{Short Questions}
+\begin{enumerate}
+  \item \textbf{1 pt} -- What is an overloaded operator?
+
+    An overloaded operator is a user-defined operator for existing or
+    user-defined types.  It permits assigning type-specific meaning to the
+    standard C++ operators.  Care should be taken to not violate the semantics
+    of the operators, though there is no language enforcement.
+
+  \item \textbf{1 pt} -- Define a compound expression.
+    
+    A compound expression is an expression involving multiple operators and
+    operands.
+    
+  \item \text{1 pt} -- Determine the results of the following expressions and
+    test your answers by compiling the expressions.
+
+    \begin{enumerator}
+      \item \mint{cpp}{-40 * 4 + 23 / 7} = -157
+      \item \mint{cpp}{-40 + 4 * 23 / 7} =  -27
+      \item \mint{cpp}{40 / 4 * 23 % 7}  =    6
+      \item \mint{cpp}{-40 / 4 * 23 % 7} =   -6
+    \end{enumerator}
+
+  \item \textbf{1 pt} -- What is the meaning of short-circuit evaluation in the
+    context of logical operators?
+
+    The compile emits code that does not necessarily evaluate all subexpressions
+    of a logical expression.  The terms at a given lexical level of the
+    expression are evaluated from left to right, as written.
+\end{enumerate}
+
+\section*{Programming Challenge}
+\inputminted[bgcolor=lightgray]{bash}{summary-stats-output}
+
+\end{document}
