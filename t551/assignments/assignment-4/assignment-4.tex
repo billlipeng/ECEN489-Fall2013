@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage[paper=letterpaper, margin=2.5cm]{geometry}
 \usepackage{minted}
 
 \begin{document}
@@ -40,22 +41,47 @@ Grader UIN:\\
     A compound expression is an expression involving multiple operators and
     operands.
     
-  \item \text{1 pt} -- Determine the results of the following expressions and
+  \item \textbf{1 pt} -- Determine the results of the following expressions and
     test your answers by compiling the expressions.
 
-    \begin{enumerator}
-      \item \mint{cpp}{-40 * 4 + 23 / 7} = -157
-      \item \mint{cpp}{-40 + 4 * 23 / 7} =  -27
-      \item \mint{cpp}{40 / 4 * 23 % 7}  =    6
-      \item \mint{cpp}{-40 / 4 * 23 % 7} =   -6
-    \end{enumerator}
+    \begin{enumerate}
+      \item \mint{cpp}|-40 * 4 + 23 / 7| = -157
+      \item \mint{cpp}|-40 + 4 * 23 / 7| =  -27
+      \item \mint{cpp}|40 / 4 * 23 % 7|  =    6
+      \item \mint{cpp}|-40 / 4 * 23 % 7| =   -6
+    \end{enumerate}
 
   \item \textbf{1 pt} -- What is the meaning of short-circuit evaluation in the
     context of logical operators?
 
-    The compile emits code that does not necessarily evaluate all subexpressions
-    of a logical expression.  The terms at a given lexical level of the
-    expression are evaluated from left to right, as written.
+    The compiler emits code that does not necessarily evaluate all
+    subexpressions of a logical expression.  The terms at a given
+    lexical level of the expression are evaluated from left to right,
+    as written.  As soon as the truth or falsity of the subexpression
+    can be determined, evaluation stops.  This allows subexpressions
+    that have side-effects, such as the increment and decrement
+    operators, to be conditionally invoked, which can be convenient in
+    some situations.
+
+  \item \textbf{1 pt} -- Explain the structure of the conditional operator.
+      
+    The conditional operator evaluates its condition (the expression to the left
+    of the question mark).  If the condition is true, the conditional operator
+    takes the value of the expression between the question mark and the colon.
+    If the condition is false, the conditional operator takes the value of the
+    expression to the right of the colon.
+
+  \item \textbf{1 pt} -- Consider the following variables of the given type:
+    \begin{enumerate}
+      \item long
+      \item unsigned long
+      \item signed long
+      \item double
+      \item double
+      \item unsigned int
+      \item int
+      \item unsigned long
+    \end{enumerate}
 \end{enumerate}
 
 \section*{Programming Challenge}
