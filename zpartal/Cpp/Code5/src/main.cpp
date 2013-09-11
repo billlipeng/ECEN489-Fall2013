@@ -8,6 +8,7 @@ ECEN 489 HW 5
 
 using namespace std;
 
+// Custom Exception Class
 class divzeroexception: public exception
 {
   virtual const char* what() const throw()
@@ -24,12 +25,14 @@ int main() {
 
 	cin >> a >> b;
 
+	// Try block tests for 0 in b
 	try {
 		if (b==0) {
 			throw (zero_exc);
 		}
 		cout << a << '/' << b << '=' << a/b << endl;
 	}
+	// Will catch thrown exception and print exception message
 	catch (exception& e)
 	{
 		cout << e.what() << endl;
