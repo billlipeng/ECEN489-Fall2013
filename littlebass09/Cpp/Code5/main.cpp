@@ -28,8 +28,22 @@ int main()
 	// self check for errors
 	if(number2 != 0)
 		cout<<number1<<"/"<<number2<<" = "<<number1/number2<<endl;
+
+	//oh no, the entered 0!!!
 	else 
+	{
 		cout<<"Ouch you tried to divide by 0!!!!"<<endl;
+
+		//get new number
+		while(number2 == 0)
+		{
+			cout<<"Please give us another number for your second number"<<endl;
+			cin >> number2;
+		}
+
+		//complete calculation
+		cout<<number1<<"/"<<number2<<" = "<<number1/number2<<endl;
+	}
 }
 
 
