@@ -11,8 +11,10 @@ void setup()  {
 void testMotor(int pin, int count);
 
 void loop()  { 
+  digitalWrite(motorCtl_2, LOW);
   testMotor(motorCtl_1, 1);
   delay(1000); 
+  digitalWrite(motorCtl_1, LOW);
   testMotor(motorCtl_2, 1); 
   delay(1000);
 }
