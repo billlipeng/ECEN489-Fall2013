@@ -1,3 +1,18 @@
+
+== Schedule ==
+
+Soon, if possible:
+Database
+
+Monday, September 23:
+JSON, DataAcquisition, StatisticalAnalysis, DataInjection
+
+Wednesday, September 25:
+SocketProgramming, DataStorage, Visualization
+
+
+== Info ==
+
 This file contains the topics, teams and tasks for the tutorials.
 Commit your tutorials and examples in Shared/Tutorials/<topic>.
 Code should be in C++ whenever possible.
