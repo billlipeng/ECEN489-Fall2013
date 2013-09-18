@@ -1,0 +1,22 @@
+= ECEN 489-502 -- Lab 4: Sensing and Actuation II =
+
+== Pre-Lab ==
+
+1) Modify your sketches for both the Light Sensor and Temperature Sensor that you created in the pre-lab activity of Lab 3 to automate the calibration process of the sensors.
+Specifically, each sketch should sequentially perform the following tasks:
+
+a)      Prompt the user for input at the console window
+b)      Measure the value of the sensor at the condition specified (using the 'enter' key on your laptop)
+c)       Store this measured value into the appropriate data type
+d)      Repeat for the required number of calibration steps
+e)      Use the measured values to calculate the unknown coefficients
+
+== Lab Tasks ==
+
+1) Demonstrate the operation of your sketches using the three known temperature sources for the Temperature Sensor and two known light sources for the Light Sensor.
+
+== Lab Follow-Up ==
+
+1) Modify your sketches to store time-stamped measurements of the calibrated data in a database you create locally.
+2) Prepare three suggestions for a system demonstration
+
