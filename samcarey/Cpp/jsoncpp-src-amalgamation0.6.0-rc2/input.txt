@@ -1,0 +1,22 @@
+// Sensor node data
+{	
+    "id" : "Bob",	//Which of the 15 nodes is sending data?  
+
+    "sensors" : 	// Sensors currently in direct communication 
+	[
+        "Joe",
+        "Ike",
+        "Tom"
+        ],
+
+    // data
+    "data" : {	"temperature" : 30, 
+	      	"movement" : 2.3,	//inches  
+	      	"rotation" : "clockwise", 
+	       	"errors" : [ 
+			"accelerometer malfunction",
+			"photoresistor unplugged"
+			]
+	     }
+}
+
