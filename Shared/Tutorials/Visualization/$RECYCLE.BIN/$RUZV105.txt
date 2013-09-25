@@ -1,0 +1,19 @@
+PLC 06
+
+// Rung 1
+// Address 0
+STR SP0
+LD K202
+OUT V710
+LDA O2000
+OUT V711
+LDA O2010
+OUT V712
+
+// Rung 2
+// Address 7
+END
+
+// Rung 3
+// Address 8
+NOP

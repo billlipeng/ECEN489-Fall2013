@@ -1,0 +1,42 @@
+library ©Ì
+Ìa collection of frequently used routines in a formthat facilitates their inclusion into programs.ÞJÞ
+
+object file ©Ì
+Ìa file consisting of one or more object units. Object files serve as input to the linkingprocessor.ÞJÞ
+
+account ©Ì
+Ìa group of files and privileges, usually associatedwith a particular user.ÞJÞ
+
+source language ©Ì
+Ìa language used to prepare a source programsuitable for processing by an assembler orcompiler.ÞJÞ
+
+job ©Ì
+Ìa collection of steps or activities presented togetherto a data processing system for execution.ÞJÞ
+
+block ©Ì
+Ìa set of disk sectors large enough to contain 1,024words (a page) of stored information.ÞJÞ
+
+key ©Ì
+Ìa data item that uniquely identifies a record within akeyed or indexed file.ÞJÞ
+
+monitor ©Ì
+Ìa control program that supervises the processing,loading, and execution of other programs.ÞJÞ
+
+run unit ©Ì
+Ìa memory image of an executable program.  It isthe result of the linking process and is executedas a job step.ÞJÞ
+
+bandwidth ©Ì
+Ìthe maximum rate at which memory, an I/O channel,or a front©end processor can deliver or acceptinformation.ÞJÞ
+
+modem ©Ì
+Ìa device which converts data processing device signalsto telephone tones and telephone tones to dataprocessing device signals.ÞJÞ
+
+file information table ©Ì
+#Ìa table of information associated witheach file.  It contains suchinformation as file type, size,location, access controls, and dates.Þ#JÞ
+
+front©end processor ©Ì
+#Ìa minicomputer on to which theprocessing and communications load isdistributed.Þ#JÞ
+
+logical device ©Ì
+Ìa peripheral device represented in a programby a special name (i.e. LP) rather than byspecific physical device name.ÞJÞ
+
