@@ -64,11 +64,11 @@ void calibration(double *coef) {
   }
   else if (response == 2) {
     // If use preset values
-    r_0c = 97663;
-    r_rt = 30000;
-    r_100c = 2032;
+    r_0c = 46000;
+    r_rt = 29000;
+    r_100c = 6000;
     t_0c = 0+273;
-    t_rt = 25+273;
+    t_rt = 27+273;
     t_100c = 100+273;
   }
   else {};
@@ -103,7 +103,7 @@ void calibration(double *coef) {
 
   c = ((g3-g2)/(L3-L2))*(1/(L1+L2+L3));
   b = g2 - c*(pow(L1,2.0)+L1*L2+pow(L2,2.0));
-  a = Y1 - (b+pow(L2,2.0)*c)*L1;
+  a = Y1 - (b+pow(L1,2.0)*c)*L1;
 
   // Serial.println("abc");
   // Serial.println(a, DEC);
@@ -119,14 +119,14 @@ void calibration(double *coef) {
 }
 
 // Return Thermistors Resistance
-int thermRes() {
+double thermRes() {
   double v2 = analogRead(sensorPin2);
-  double Va = v2 * (vdc/1023.0);
+  double Va = v2 * (vdc/1024.0);
   double resistance = (Va*33000.0)/(5-Va);
-  return (int)resistance;
+  return (double)resistance;
 }
 
-int readThermRes () {
+double readThermRes () {
   // Collect 5 Values
   double res[5];
   for (int i = 0; i < 5; i++) {
@@ -161,5 +161,7 @@ void loop()  {
   Serial.print("TEMP: ");
   Serial.print(temp);
   Serial.println(" C");
+  // double res = readThermRes();
+  // Serial.println(res);
   delay(300);
 }

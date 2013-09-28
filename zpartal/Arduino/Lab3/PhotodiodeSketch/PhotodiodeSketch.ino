@@ -15,32 +15,28 @@ double luxmax = 0;
 double gamma = 0;
 
 double readFromSerial() {
-  char buffer[] = {' ',' ',' '};
+  char buffer[] = {' ',' ',' ',' ',' '};
   while(!Serial.available());
   Serial.readBytesUntil('n',buffer,3);
   return atof(buffer);
 }
 
 void calibration() {
-  // double r_0 = 0;
-  // double r_1 = 0;
-  double l_0 = 0;
-  double l_1 = 100;
 
   Serial.println("BEGIN CALIBRATION PROCESS");
-  Serial.println("Darkness 0.1 Lux:");
-  readFromSerial();
+  Serial.println("Darkness Lux:");
+  luxmin = readFromSerial();
   rmin = readPhotoRes();
   Serial.print("RMIN: ");
   Serial.println(rmin);
 
-  Serial.println("Brightness 10000 Lux:");
-  readFromSerial();
+  Serial.println("Brightness Lux:");
+  luxmax = readFromSerial();
   rmax = readPhotoRes();
   Serial.print("RMAX: ");
   Serial.println(rmax);
 
-  gamma = (log(rmin)-log(rmax))/(log(10000)-log(.1));
+  gamma = (log(rmin)-log(rmax))/(log(luxmax)-log(luxmin));
 }
 
 // Return PhotoReistor Resistance
@@ -68,7 +64,7 @@ long readPhotoRes () {
 
 double getLux() {
 	// double lux = 255.84*pow(readPhotoRes(),-10/9);
-  double exponent = (log(rmin/readPhotoRes())/gamma)+log(0.1);
+  double exponent = (log(rmin/readPhotoRes())/gamma)+log(luxmin);
   double lux = pow(2.718,exponent);
   // Serial.print("LUX RAW: ");
   // Serial.println(lux, DEC);
