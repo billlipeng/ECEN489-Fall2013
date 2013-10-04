@@ -1,0 +1,51 @@
+\documentclass{article}
+
+\usepackage[paper=letterpaper, margin=1in]{geometry}
+
+\title{Motor Team Monday Deliverables}
+\date{Friday, 4 October 2013}
+
+\begin{document}
+\maketitle
+
+\section{Schemata}
+\subsection{Input Side JSON}
+The input side arduino will communicate with the input side control program by
+passing simple JSON objects over the serial line.  These JSON objects will have
+a single field, \texttt{tempK}, containing a scalar temperature value in Kelvin.
+
+\subsection{Database}
+The database will store readings from the input side and feedback from the
+control side.  The input side data will be stored in a table named
+\texttt{temp\_readings}, with columns \texttt{arduino\_id} (integer),
+\texttt{reading\_time\_utc} (UTC timestamp), and \texttt{temp\_kelvin} (real
+scalar value in Kelvin).  The control side data will be stored in a table names
+\texttt{motor\_readings} with columns \texttt{arduino\_id} (integer),
+\texttt{reading\_time\_utc} (UTC timestamp), and \texttt{motor\_volts} (real
+scalar value in volts).
+
+\section{Group Breakdown}
+\begin{itemize}
+  \item \emph{Input Side (Arduino and Control Program):} Michael Bass
+  \item \emph{Visualization:} Taahir Ahmed, Narayanan
+  \item \emph{Database:} Taahir Ahmed, Ashton, Desmond
+  \item \emph{Control:} Dipanjan, Jeff, Clayton
+\end{itemize}
+
+\section{Database Credentials}
+We have a database named \texttt{motor\_team} on \texttt{fulla.ece.tamu.edu}, with
+user \texttt{motor\_team\_user} and password \texttt{motor\_team\_password}.
+You will need to be on the campus network or have a VPN connection to campus to
+connect to the database.
+
+\section{Deliverables for Monday, 7 October 2013}
+\begin{itemize}
+\item \emph{Input Side:} Send JSON data from Arduino and unwrap it in the
+  control program.
+\item \emph{Visualization:} Produce a graph updating from some source.
+\item \emph{Database:} Set up database.
+\item \emph{Control:} Filtering and conditioning logic.
+
+\end{itemize}
+
+\end{document}
