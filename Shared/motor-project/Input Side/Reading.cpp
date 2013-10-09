@@ -7,6 +7,7 @@ Reading::Reading(string jsonInput)
 	if(_validReading)
 	{
 		_time = time(NULL);
+		_arduinoId = 1;
 	}
 	else 
 	{
@@ -60,44 +61,6 @@ void Reading::ValidateJson(string jsonInput)
 
 	double tempTemperature = 0;
 	stringStream >> tempTemperature;
-	
-	stringStream >> validationString;
-	if (validationString != ",")
-	{
-		_errorMessage = "Improper JSON format";
-		return;
-	}
-
-	stringStream >> validationString;
-	if (validationString != "\"")
-	{
-		_errorMessage = "Improper JSON format";
-		return;
-	}
-
-	stringStream >> validationString;
-	if (validationString != "arduinoId")
-	{
-		_errorMessage = "Not a temperature reading";
-		return;
-	}
-
-	stringStream >> validationString;
-	if (validationString != "\"")
-	{
-		_errorMessage = "Improper JSON format";
-		return;
-	}
-
-	stringStream >> validationString;
-	if (validationString != ":")
-	{
-		_errorMessage = "Improper JSON format";
-		return;
-	}
-
-	int arduinoId = 0;
-	stringStream >> arduinoId;
 
 	stringStream >> validationString;
 	if (validationString != "}")
@@ -107,7 +70,6 @@ void Reading::ValidateJson(string jsonInput)
 	}
 
 	_temperature = tempTemperature;
-	_arduinoId = arduinoId;
 	_validReading = true;
 	_errorMessage = "";
 	return;
