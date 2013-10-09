@@ -1,6 +1,4 @@
-#include <json_arduino.h>
-
-
+#include <aJSON.h>
 
 /*
 Title: Arduino Light Sensor
@@ -17,11 +15,8 @@ int ledPin = 13;    // select the input pin for the potentiometer
 // ---------------------
 // VARIABLE DECLARATIONS
 // ---------------------
-  token_list_t* LIST = create_token_list(1);  // List of JSON tokens
-  char json_string[256];
-  int lightLevel = 0;
-  String LEDstate = "LOLOLOL";
-  boolean OnOff = LOW;
+char jsonString[256] = "";
+String LEDstate = "OFF";
 
 // ---------------------
 // FUNCTION DECLARATIONS
@@ -44,24 +39,15 @@ int ledPin = 13;    // select the input pin for the potentiometer
 // MAIN LOOP
 // ---------------------
 void loop() {
+  strcpy(jsonString, getInput("").c_str());
   
-  strcpy(json_string, getInput("").c_str());
-  json_to_token_list(json_string, LIST);
-  //lightLevel = atoi(json_get_value(LIST, "lightLevel"));
-  //strcpy(LEDstate, json_get_value(LIST, "LEDstate"));
-  /*
+  aJsonObject* root = aJson.parse(jsonString);
+  LEDstate = aJson.getObjectItem(root, "LEDstate")->valuestring;
+
   if(LEDstate == "ON")
-    OnOff = HIGH;
+    digitalWrite(ledPin, HIGH);
   else if(LEDstate == "OFF")
-    OnOff = LOW;
-  */
-  
-  //digitalWrite(ledPin, LOW);
-  Serial.println(json_string);
-  Serial.println(json_get_value(LIST, "lightLevel"));
-  
-  //release_token_list(LIST);
-  delay(1000);
+    digitalWrite(ledPin, LOW);
 }
 
 
