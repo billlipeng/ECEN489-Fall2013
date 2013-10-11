@@ -6,42 +6,106 @@
 #include <string>
 #include <stdlib.h>
 #include "Reading.h"
+#include <pthread.h>
+#include <cstdlib>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
 // application reads from the specified serial port and reports the collected data
+//how to enable pthread
+//right cklick on the project in the project explorer -> properties -> c/c++ build -> Settings -> linker -> libraries -> add -> pthread -> ok -> rebuild
+struct thread_data{
+	int thread_id;
+	char* message;
+};
 
+bool canPrint;
 
-int _tmain(int argc, _TCHAR* argv[])
+void *ArduinoConnection(void *threadArgument)
 {
+
+
 	cout << "Connecting to arduino..." << endl;
 
-	Serial* SP = new Serial("\\\\.\\COM20");    // adjust as needed
+	int comPortNumber = *((int *)threadArgument);
+	string comPortNumberString = "";
+	stringstream stringStream;
+	stringStream << comPortNumber;
+	stringStream>>comPortNumberString;
+	string comPortString = "\\\\.\\COM" + comPortNumberString;
+	cout<<"Com Port String = "<<comPortString<<endl;
+
+	char* comPortPointer = new char[comPortString.size() + 1];
+	strcpy(comPortPointer, comPortString.c_str());
+
+	Serial* SP = new Serial(comPortPointer);    // adjust as needed
 
 	if (SP->IsConnected())
-		cout << "Connection established with Arduino!!" << endl;	// Let us know the serial is connected
+		cout << "Connection established with Arduino on Com Port "<<comPortNumber<<endl;
 
-
-	int dataLength = 256;
+	const int dataLength = 256;
 	int readResult = 0;
 
 	while(SP->IsConnected())
 	{
-		char incomingData[256] = "";			// don't forget to pre-allocate memory
+		char incomingData[dataLength] = "";
+
 		readResult = SP->ReadData(incomingData,dataLength);
-		//cout << "Bytes read: " << readResult << endl;
 
-		string test(incomingData);
-
-		if (readResult > 0) {
-			Reading reading = Reading(test);
-			cout<<"Temperature = "<<reading.GetTemperature()<<endl<<reading.GetErrorMessage()<<endl;
-			//cout << test << endl;
+		if (readResult > 0)
+		{
+			bool working = true;
+			while(working)
+			{
+				if(canPrint)
+				{
+					canPrint = false;
+					Reading reading = Reading(incomingData);
+					cout<<"Temperature = "<<reading.GetTemperature()<<"       "<<reading.GetErrorMessage()<<endl;
+					cout <<"ComPort = "<<comPortNumber<<endl<<endl;
+					canPrint = true;
+					working = false;
+				}
+				else
+					Sleep(10);
+			}
 		}
-		test = "";
 
-		Sleep(300);
+		char dataToWrite[1] = {'1'};
+		SP->WriteData(dataToWrite, 1);
+
+		Sleep(100);
 	}
-	cin >> argc;
-	return 0;
+
+}
+
+
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	canPrint = true;
+	const int numberOfArduinos = 3;
+	int comPorts [numberOfArduinos]= {3,4,5};
+
+	vector<pthread_t> threads;
+	struct thread_data threadData;
+	for(int i = 0; i < numberOfArduinos; i++)
+	{
+		threads.push_back(pthread_t());
+		int notSuccessful = pthread_create(&threads[i], NULL, ArduinoConnection, (void*)&comPorts[i]);
+
+		if(notSuccessful)
+			cout<<"Error Creating Thread For Com Port "<<comPorts[i]<<endl;
+		else
+			cout<<"Successfully Created Thread For Com Port "<<comPorts[i]<<endl;
+
+	}
+
+	while(true)
+	{
+	}
+
 }
