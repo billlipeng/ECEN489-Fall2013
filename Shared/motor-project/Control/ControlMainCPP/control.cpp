@@ -2,18 +2,19 @@
 #include <sstream>
 #include <iostream>
 #include <postgresql/libpq-fe.h>
-#include <stdio.h>
-#include <tchar.h>
+#include <cstdio>
 #include <string>
-#include <stdlib.h>
+#include <cstdlib>
 #include <vector>
-#include <errno.h>
+#include <cerrno>
 #include <sys/time.h>
+#include <thread>
 
 using namespace std;
 
 // class to create an average temperature object
-class AverageTemp() {
+class AverageTemp
+{
 	private:
 		int arduino_id;
 		double average_temp;
@@ -23,7 +24,8 @@ class AverageTemp() {
 		int getTemp() { return average_temp; }
 };
 
-class MotorReading() {
+class MotorReading
+{
 	private:
 		int arduino_id;
 		double motor_volt;
@@ -100,6 +102,8 @@ AverageTemp getAVGTemp() {
 	TempSum = TempSum/TempInfoRow;
 	cout<<"Avg: "<<TempSum<<endl;
 	cout << endl;
+
+    PQclear(TempInfo);
 
 	AverageTemp a1(1, TempSum);	// create new average temp object with id 1 and avg
 
@@ -269,23 +273,23 @@ MotorReading readFromArduino() {
 	int arduino_id = 0;
 	double motor_voltage = 0.0;
 	
-	char tempChar = '';
+	char tempChar = ' ';
 	int fieldCounter = 0;
 	while (tempChar != '}') {
-		fscanf(file, "%c", tempChar); //Writing to the file
+		fscanf(file, "%c", &tempChar); //Writing to the file
 		if (tempChar == ':') {
 			if (fieldCounter == 0) {
 				// then we know we are getting arduino_id
-				fscanf(file, "%d", arduino_id);
+				fscanf(file, "%d", &arduino_id);
 				++fieldCounter; // increment field counter for next field (motor_voltage)
 			} else if(fieldCounter == 1) {
 				// then we know we're getting the voltage
-				fscanf(file, "%f", motor_voltage);
+				fscanf(file, "%lf", &motor_voltage);
 				--fieldCounter; // reset field counter for next JSON object
 				break; // we break from for loop because we should have parsed both JSON data fields by now
 			} else cout <<"\nERROR PARSING JSON DATA\n\n";
 		}
-        sleep(1);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
     fclose(file);
 	MotorReading a1(arduino_id, motor_voltage);
@@ -306,8 +310,8 @@ void writeToArduino(int arduino_id, double avgTemperature) {
 	FILE *file;
 	file = fopen("/dev/ttyUSB0","w");  //Opening device file
 
-	fprintf(file, JSONdata.c_str()); //Writing to the file
-	sleep(1);
+	fprintf(file, JSONdata.str().c_str()); //Writing to the file
+	std::this_thread::sleep_for(std::chrono::seconds(1));
     fclose(file);
 }
 
@@ -326,34 +330,53 @@ int main(int argc, char *argv[])
 			 << "4.) Insert Motor Voltage in DB\n"
 			 << "0.) Quit\n";
 		cin >> debug;
-		while (!debug) {
-			switch(debug) {
-				case 1:
-					AverageTemp a1() = getAvgTemp();
-					cout << "\n\nArduino ID: " << a1.getID() << "Average Temp: " << a1.getTemp() << "\n";
-					break;
-				case 2:
-					writeToArduino(99, 999.9);
-					break;
-				case 3:
-					MotorReading mrA() = readFromArduino();
-					cout << "\n\nArduino ID: " << mrA.getID() << "Motor Reading: " << mrA.getVolt() << "\n";
-					break;
-				case 4:
-					InsertMotorRec(conn, 99, 999.9);
-					break;
-				case 0:
-					CloseConn(conn); 
-					return 0;
+		while (debug)
+        {
+			switch(debug)
+            {
+            case 1: {
+                AverageTemp a1 = getAVGTemp();
+                cout << "\n\nArduino ID: " << a1.getID() << "Average Temp: " << a1.getTemp() << "\n";
+                break;
+            }
+			case 2: {
+                writeToArduino(99, 999.9);
+                break;
+            }
+            case 3: {
+                MotorReading mrA = readFromArduino();
+                cout << "\n\nArduino ID: " << mrA.getID() << "Motor Reading: " << mrA.getVolt() << "\n";
+                break;
+            }
+            case 4: {
+                stringstream convstream;
+                convstream << 99 << " " << 999.9;
+                string arduino_id_str;
+                convstream >> arduino_id_str;
+                string voltage_str;
+                convstream >> voltage_str;
+                
+                InsertMotorRec(conn, arduino_id_str.c_str(), voltage_str.c_str());
+                break;
+            }
+            case 0: {
+                CloseConn(conn); 
+                return 0;
+            }
+            default: {
+                cerr << "Unknown choice" << endl;
+                break;
+            }
+            }
 			
-			cout << "DEBUG...\n";
-			cout << "1.) Getting Average Temps\n"
-				 << "2.) Writing Average Temp to Arduino\n"
-				 << "3.) Reading Motor Voltage from Arduino\n"
-				 << "4.) Insert Motor Voltage in DB\n"
-				 << "0.) Quit\n";
-			cin >> debug;
-		}
+            cout << "DEBUG...\n";
+            cout << "1.) Getting Average Temps\n"
+                 << "2.) Writing Average Temp to Arduino\n"
+                 << "3.) Reading Motor Voltage from Arduino\n"
+                 << "4.) Insert Motor Voltage in DB\n"
+                 << "0.) Quit\n";
+            cin >> debug;
+        }
 		
 		/*
 		// Get AVG temperature reading from DB
