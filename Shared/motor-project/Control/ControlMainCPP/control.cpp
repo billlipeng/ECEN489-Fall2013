@@ -138,128 +138,6 @@ AverageTemp getAVGTemp(int arduino_id) {
 	return a1;
 }
 
-
-/* 
-void FetchTempRec(PGconn *conn, int tablePosition, double avg1temp, double avg2temp, double avg3temp, double avg4temp)
-{
-  // Will hold the number of field in employee table
-  int nFields;
-
-  // Start a transaction block
-  PGresult *res  = PQexec(conn, "BEGIN");
-
-  if (PQresultStatus(res) != PGRES_COMMAND_OK)
-  {
-    cout << "BEGIN command failed\n";
-    PQclear(res);
-    CloseConn(conn);
-  }
-
-  // Clear result
-  PQclear(res);
-
-  // Fetch rows from employee table
-  res = PQexec(conn, "DECLARE emprec CURSOR FOR select * from temp_readings");
-  if (PQresultStatus(res) != PGRES_COMMAND_OK)
-  {
-    cout << "DECLARE CURSOR failed\n";
-    PQclear(res);
-    CloseConn(conn);
-  }
-
-  // Clear result
-  PQclear(res);
-
-  res = PQexec(conn, "FETCH ALL in temprec");
-
-  if (PQresultStatus(res) != PGRES_TUPLES_OK)
-  {
-    cout << "FETCH ALL failed\n";
-    PQclear(res);
-    CloseConn(conn);
-  }
-
-  // Get the field name
-  nFields = PQnfields(res);
-
-  // Prepare the header with temperature table field name
-  cout << "\nFetch temp record:";
-  cout << "\n********************************************************************\n";
-    for (int i = 0; i < nFields; i++)
-        printf("%-30s", PQfname(res, i));
-    cout << "\n********************************************************************\n";
-
-    // Next, print out the temperature record for each row
-    for (;  tablePosition < PQntuples(res); tablePosition++)
-    {
-        for (int j = 0; j < nFields; j++)
-            printf("%-30s", PQgetvalue(res, tablePosition, j));
-        printf("\n");
-    }
-	
-	vector<double> a1temp(); // arduino 1 temperatures
-	vector<double> a2temp(); // arduino 2 temperatures
-	vector<double> a3temp(); // arduino 3 temperatures
-	vector<double> a4temp(); // arduino 4 temperatures
-	
-	for (; tablePosition < PQntuples(res); tablePosition++)
-    {
-		if (PQgetvalue(res, tablePosition, 0) == 1) { // arduino 1 temp reading
-			if (a1temp.size() <= 10) {
-				a1temp.push_back(PQgetvalue(res, tablePosition, 2));
-			} else {
-				for (int i = 0; i < a1temp.size(); ++i) {
-					avg1temp = avg1temp + a1temp[i];
-				}
-				avg1temp = avg1temp / 10;
-			}
-		}
-		if (PQgetvalue(res, tablePosition, 0) == 2) { // arduino 2 temp reading
-			if (a2temp.size() <= 10) {
-				a2temp.push_back(PQgetvalue(res, tablePosition, 2));
-			} else {
-				for (int i = 0; i < a2temp.size(); ++i) {
-					avg2temp = avg2temp + a2temp[i];
-				}
-				avg2temp = avg2temp / 10;
-			}
-		}
-		if (PQgetvalue(res, tablePosition, 0) == 3) { // arduino 3 temp reading
-			if (a3temp.size() <= 10) {
-				a3temp.push_back(PQgetvalue(res, tablePosition, 2));
-			} else {
-				for (int i = 0; i < a3temp.size(); ++i) {
-					avg3temp = avg3temp + a3temp[i];
-				}
-				avg3temp = avg3temp / 10;
-			}
-		}
-		if (PQgetvalue(res, tablePosition, 0) == 4) { // arduino 4 temp reading
-			if (a4temp.size() <= 10) {
-				a4temp.push_back(PQgetvalue(res, tablePosition, 2));
-			} else {
-				for (int i = 0; i < a4temp.size(); ++i) {
-					avg4temp = avg4temp + a4temp[i];
-				}
-				avg4temp = avg4temp / 10;
-			}
-		}
-	}
-	
- 
-    PQclear(res);
-
-    // Close the emprec
-    res = PQexec(conn, "CLOSE emprec");
-    PQclear(res);
-
-    // End the transaction
-    res = PQexec(conn, "END");
-
-  // Clear result
-    PQclear(res);
-} */
-
 /* Append SQL statement and insert record into voltage table */
 void InsertMotorRec(PGconn *conn, const char * arduino_id, const char * motor_voltage)
 {
@@ -290,11 +168,11 @@ void InsertMotorRec(PGconn *conn, const char * arduino_id, const char * motor_vo
 	{"arduino_id":1,"motor_voltage":2.5}
 */
 
-MotorReading readFromArduino() {
+MotorReading readFromArduino(string port, int outID) {
 	cout << "Connecting to arduino..." << endl;
 	
 	FILE *file;
-	file = fopen("/dev/ttyUSB0","r");  //Opening device file
+	file = fopen(port.c_str(),"r");  //Opening device file
 	
 	int arduino_id = 0;
 	double motor_voltage = 0.0;
@@ -305,7 +183,7 @@ MotorReading readFromArduino() {
 		fscanf(file, "%c", &tempChar); //Writing to the file
 		if (tempChar == ':') {
 			if (fieldCounter == 0) {
-				// then we know we are getting arduino_id
+				// then we know we are getting arduino_id...BUT WE DONT CARE
 				fscanf(file, "%d", &arduino_id);
 				++fieldCounter; // increment field counter for next field (motor_voltage)
 			} else if(fieldCounter == 1) {
@@ -318,12 +196,12 @@ MotorReading readFromArduino() {
         std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
     fclose(file);
-	MotorReading a1(arduino_id, motor_voltage);
+	MotorReading a1(outID, motor_voltage);
 	return a1;
 }
 
-void writeToArduino(int arduino_id, double avgTemperature) {
-	cout << "Connecting to arduino..." << endl;
+void writeToArduino(vector<int> inID, vector<string> outPorts, int arduino_id, double avgTemperature) {
+	cout << "\nConnecting to arduino...\n" << endl;
 		
 	// create JSON data object to send to arduino
 	stringstream JSONdata;
@@ -334,7 +212,21 @@ void writeToArduino(int arduino_id, double avgTemperature) {
 	JSONdata << "}";
 	
 	FILE *file;
-	file = fopen("/dev/ttyUSB0","w");  //Opening device file
+	
+	// CHANGE THE fopen PATH TO CORRESPONDING ARDUINO
+	if (arduino_id == inId[0]) {
+		file = fopen(outPorts[0].c_str(),"w");  //Opening device file
+	}
+	else if (arduino_id == inId[1]) {
+		file = fopen(outPorts[1].c_str(),"w");  //Opening device file
+	}
+	else if (arduino_id == inId[2]) {
+		file = fopen(outPorts[2].c_str(),"w");  //Opening device file
+	}
+	else if (arduino_id == inId[3]) {
+		file = fopen(outPorts[3].c_str(),"w");  //Opening device file
+	}
+	else cerr << "\nINVALID INPUT ARDUINO ID!\n";
 
 	fprintf(file, JSONdata.str().c_str()); //Writing to the file
 	std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -348,7 +240,7 @@ int main(int argc, char *argv[])
 
 	if (conn != NULL)
 	{
-		int debug = 0;
+	/*	int debug = 0;
 		cout << "DEBUG...\n";
 		cout << "1.) Getting Average Temps\n"
 			 << "2.) Writing Average Temp to Arduino\n"
@@ -393,7 +285,7 @@ int main(int argc, char *argv[])
                 cerr << "Unknown choice" << endl;
                 break;
             }
-            }
+			}
 			
             cout << "DEBUG...\n";
             cout << "1.) Getting Average Temps\n"
@@ -402,22 +294,43 @@ int main(int argc, char *argv[])
                  << "4.) Insert Motor Voltage in DB\n"
                  << "0.) Quit\n";
             cin >> debug;
-        }
+        } */
 		
-		/*
-		// Get AVG temperature reading from DB
-		//FetchTempRec(conn, &tablePosition, &avg1temp, &avg2temp, &avg3temp, &avg4temp);
-		AverageTemp a1() = getAvgTemp();
-
-		// Write Avg Temperature to the Arduino Serially
-		writeToArduino(a1.getID(), a1.getTemp()); // EDIT APPROPRIATELY
-
-		// Read motor reading from Arduino
-		MotorReading mrA() = readFromArduino();
+		vector<int> inID;	// input arduino IDs
+		vector<int> outID;	// output arduino IDs
+		vector<string> outPorts;	// character device file for output arduinos
+		int numArduinos, inputID;
+		string outputPort; 
 		
-		// Insert motor reading into DB
-		InsertMotorRec(conn, mrA.getID(), mrA.getVolt());
-		*/
+		cout << "\n#### Arduino ID Input Stage: Input Side ####\n";
+		cout << "How many Arduinos are there on the input stage? :";
+		cin >> numArduinos;
+		for (int i = 0; i < numArduinos; ++i) {
+			cout << "Enter Arduino ID: ";
+			cin >> inputID;
+			inID.push_back(inputID);
+		}
+		
+		cout << "\n#### Arduino ID Output Stage ####\n";
+		cout << "How many Arduinos are there on the output stage? :";
+		cin >> numArduinos;
+		for (int i = 0; i < numArduinos; ++i) {
+			cout << "Enter Arduino ID: ";
+			cin >> inputID;
+			outID.push_back(inputID);
+			cout << "Enter Arduino Character Device File: ";
+			cin >> outputPort;
+			outPorts.push_back(outputPort);
+		}
+		
+		while (true) {
+			for (int i = 0; i < inID.size(); ++i) {
+				AverageTemp at = getAvgTemp(inID[i]);
+				writeToArduino(inID, outID, at.getID(), at.getTemp());
+				//MotorReading mr = readFromArduino(outPorts[i], outID[i]);
+				InsertMotorRec(conn, mr.getID(), mr.getVolt());
+			}
+		}
 		CloseConn(conn); 
 	}
 	return 0;
