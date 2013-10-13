@@ -67,23 +67,36 @@ PGconn *ConnectDB()
 // Ashton's average temp function
 AverageTemp getAVGTemp(int arduino_id) {
 	// Values needed to make initial connection
-	const char *keywords[] = {"host","dbname","user","password"};
-	const char *values[] = {"fulla.ece.tamu.edu","motor_team","motor_team_user","motor_team_password"};
+	const char *keywords[] = {
+        "host",
+        "dbname",
+        "user",
+        "password",
+        nullptr
+    };
+	const char *values[] = {
+        "fulla.ece.tamu.edu",
+        "motor_team",
+        "motor_team_user",
+        "motor_team_password",
+        nullptr
+    };
 
 	// Initiate database connection with these values
 	PGconn *conn = PQconnectdbParams(keywords,values, 0);
 	
 	if (PQstatus(conn) != CONNECTION_OK) {
-		cerr << "PQStatus Returned CONNECTION_BAD";
+		cerr << "PQStatus Returned CONNECTION_BAD" << endl;
 	}
 	
 	stringstream convstream;
     convstream << arduino_id;
     string arduino_id_str;
+    convstream >> arduino_id_str;
 	
 	// Parameter values needed in the queries below
 	const char* paramValues[1];
-	paramValues[0]= convstream;
+	paramValues[0] = arduino_id_str.c_str();
 
 	// Get 10 most current values of the two tables, where arduino ID is from paramValues
 	const char *readTempInfo = "SELECT arduino_id, temp_kelvin from temp_readings WHERE arduino_id=$1 ORDER BY reading_time_utc DESC NULLS LAST Limit 10";
@@ -92,7 +105,7 @@ AverageTemp getAVGTemp(int arduino_id) {
 	PGresult *TempInfo = PQexecParams(conn, readTempInfo, 1, NULL, paramValues, NULL, NULL, 0);
 
 	if (PQresultStatus(TempInfo) != PGRES_TUPLES_OK) {
-		cerr << "SELECT returned an error!";
+		cerr << "SELECT returned an error!" << endl;
 	}
 	
 	// Get number of rows queried
