@@ -228,7 +228,7 @@ void writeToArduino(vector<int> inID, vector<string> outPorts, int arduino_id, d
 	}
 	else cerr << "\nINVALID INPUT ARDUINO ID!\n";
 
-	fprintf(file, JSONdata.str().c_str()); //Writing to the file
+	fprint(file, JSONdata.str().c_str()); //Writing to the file
 	std::this_thread::sleep_for(std::chrono::seconds(1));
     fclose(file);
 }
@@ -325,7 +325,7 @@ int main(int argc, char *argv[])
 		
 		while (true) {
 			for (int i = 0; i < inID.size(); ++i) {
-				AverageTemp at = getAvgTemp(inID[i]);
+				AverageTemp at = getAVGTemp(inID[i]);
 				writeToArduino(inID, outID, at.getID(), at.getTemp());
 				MotorReading mr = readFromArduino(outPorts[i], outID[i]);
 				InsertMotorRec(conn, mr.getID(), mr.getVolt());
