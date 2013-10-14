@@ -228,7 +228,7 @@ void writeToArduino(vector<int> inID, vector<string> outPorts, int arduino_id, d
 	}
 	else cerr << "\nINVALID INPUT ARDUINO ID!\n";
 
-	fprint(file, JSONdata.str().c_str()); //Writing to the file
+	fprintf(file, "%s", JSONdata.str().c_str()); //Writing to the file
 	std::this_thread::sleep_for(std::chrono::seconds(1));
     fclose(file);
 }
