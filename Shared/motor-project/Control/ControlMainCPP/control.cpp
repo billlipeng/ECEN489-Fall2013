@@ -229,6 +229,9 @@ void writeToArduino(vector<int> inID, vector<string> outPorts, int arduino_id, d
 	}
 	else cerr << "\nINVALID INPUT ARDUINO ID!\n";
 
+	if (file == NULL) 
+		cerr << "\nFile pointer is NULL\n";
+	
 	fputs(JSONobj.c_str(), file); //Writing to the file
 	std::this_thread::sleep_for(std::chrono::seconds(1));
     fclose(file);
