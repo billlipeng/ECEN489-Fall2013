@@ -193,7 +193,7 @@ MotorReading readFromArduino(string port, int outID) {
 				break; // we break from for loop because we should have parsed both JSON data fields by now
 			} else cout <<"\nERROR PARSING JSON DATA\n\n";
 		}
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
     fclose(file);
 	MotorReading a1(outID, motor_voltage);
@@ -233,7 +233,7 @@ void writeToArduino(vector<int> inID, vector<string> outPorts, int arduino_id, d
 		cerr << "\nFile pointer is NULL\n";
 	
 	fputs(JSONobj.c_str(), file); //Writing to the file
-	std::this_thread::sleep_for(std::chrono::seconds(1));
+	//std::this_thread::sleep_for(std::chrono::seconds(1));
     fclose(file);
 }
 
