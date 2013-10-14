@@ -180,9 +180,9 @@ MotorReading readFromArduino(string port, int outID) {
 	char tempChar = ' ';
 	int fieldCounter = 0;
 	while (tempChar != '}') {
-		string temp;
-		fgets(temp.c_str(), 200, file);
-		cout << temp << endl;
+		char* temp;
+		fgets(temp, 200, file);
+		//cout << temp << endl;
 		tempChar = fgetc(file);
 		//fscanf(file, "%c", &tempChar); //Writing to the file
 		if (tempChar == ':') {
