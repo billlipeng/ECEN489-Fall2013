@@ -183,8 +183,8 @@ MotorReading readFromArduino(string port, int outID) {
 		//char* temp;
 		//fgets(temp, 200, file);
 		//cout << temp << endl;
-		tempChar = fgetc(file);
-		//fscanf(file, "%c", &tempChar); //Writing to the file
+		//tempChar = fgetc(file);
+		fscanf(file, "%c", &tempChar); //Writing to the file
 		if (tempChar == ':') {
 			if (fieldCounter == 0) {
 				// then we know we are getting arduino_id...BUT WE DONT CARE
