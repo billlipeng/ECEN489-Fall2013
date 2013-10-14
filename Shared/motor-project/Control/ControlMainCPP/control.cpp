@@ -214,16 +214,16 @@ void writeToArduino(vector<int> inID, vector<string> outPorts, int arduino_id, d
 	FILE *file;
 	
 	// CHANGE THE fopen PATH TO CORRESPONDING ARDUINO
-	if (arduino_id == inId[0]) {
+	if (arduino_id == inID[0]) {
 		file = fopen(outPorts[0].c_str(),"w");  //Opening device file
 	}
-	else if (arduino_id == inId[1]) {
+	else if (arduino_id == inID[1]) {
 		file = fopen(outPorts[1].c_str(),"w");  //Opening device file
 	}
-	else if (arduino_id == inId[2]) {
+	else if (arduino_id == inID[2]) {
 		file = fopen(outPorts[2].c_str(),"w");  //Opening device file
 	}
-	else if (arduino_id == inId[3]) {
+	else if (arduino_id == inID[3]) {
 		file = fopen(outPorts[3].c_str(),"w");  //Opening device file
 	}
 	else cerr << "\nINVALID INPUT ARDUINO ID!\n";
