@@ -196,7 +196,7 @@ MotorReading readFromArduino(string port, int outID) {
 				--fieldCounter; // reset field counter for next JSON object
 				break; // we break from for loop because we should have parsed both JSON data fields by now
 			} else cout <<"\nERROR PARSING JSON DATA\n\n"; */
-		}
+		//}
         //std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
     fclose(file);
