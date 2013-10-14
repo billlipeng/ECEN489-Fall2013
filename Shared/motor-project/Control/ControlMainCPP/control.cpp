@@ -10,7 +10,74 @@
 #include <sys/time.h>
 #include <thread>
 
+#include <errno.h>
+#include <termios.h>
+#include <unistd.h>
+
 using namespace std;
+
+
+
+int
+set_interface_attribs (int fd, int speed, int parity)
+{
+        struct termios tty;
+        memset (&tty, 0, sizeof tty);
+        if (tcgetattr (fd, &tty) != 0)
+        {
+                error_message ("error %d from tcgetattr", errno);
+                return -1;
+        }
+
+        cfsetospeed (&tty, speed);
+        cfsetispeed (&tty, speed);
+
+        tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;     // 8-bit chars
+        // disable IGNBRK for mismatched speed tests; otherwise receive break
+        // as \000 chars
+        tty.c_iflag &= ~IGNBRK;         // ignore break signal
+        tty.c_lflag = 0;                // no signaling chars, no echo,
+                                        // no canonical processing
+        tty.c_oflag = 0;                // no remapping, no delays
+        tty.c_cc[VMIN]  = 0;            // read doesn't block
+        tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+
+        tty.c_iflag &= ~(IXON | IXOFF | IXANY); // shut off xon/xoff ctrl
+
+        tty.c_cflag |= (CLOCAL | CREAD);// ignore modem controls,
+                                        // enable reading
+        tty.c_cflag &= ~(PARENB | PARODD);      // shut off parity
+        tty.c_cflag |= parity;
+        tty.c_cflag &= ~CSTOPB;
+        tty.c_cflag &= ~CRTSCTS;
+
+        if (tcsetattr (fd, TCSANOW, &tty) != 0)
+        {
+                error_message ("error %d from tcsetattr", errno);
+                return -1;
+        }
+        return 0;
+}
+
+void
+set_blocking (int fd, int should_block)
+{
+        struct termios tty;
+        memset (&tty, 0, sizeof tty);
+        if (tcgetattr (fd, &tty) != 0)
+        {
+                error_message ("error %d from tggetattr", errno);
+                return;
+        }
+
+        tty.c_cc[VMIN]  = should_block ? 1 : 0;
+        tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+
+        if (tcsetattr (fd, TCSANOW, &tty) != 0)
+                error_message ("error %d setting term attributes", errno);
+}
+
+
 
 // class to create an average temperature object
 class AverageTemp
@@ -171,8 +238,18 @@ void InsertMotorRec(PGconn *conn, const char * arduino_id, const char * motor_vo
 MotorReading readFromArduino(string port, int outID) {
 	cout << "Connecting to arduino..." << endl;
 	
-	FILE *file;
-	file = fopen(port.c_str(),"r");  //Opening device file
+	int fd = open(port.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
+	if (fd < 0)
+	{
+        error_message ("error %d opening %s: %s", errno, portname, strerror (errno));
+        return;
+	}
+	
+	set_interface_attribs (fd, B9600, 0);  // set speed to 115,200 bps, 8n1 (no parity)
+	set_blocking (fd, 0);                // set no blocking
+	
+	//FILE *file;
+	//file = fopen(port.c_str(),"r");  //Opening device file
 	
 	int arduino_id = 0;
 	double motor_voltage = 0.0;
@@ -180,11 +257,18 @@ MotorReading readFromArduino(string port, int outID) {
 	char tempChar = ' ';
 	int fieldCounter = 0;
 	//while (tempChar != '}') {
+	
+	char buf[100];
+	int n = read(fd, buf, sizeof buf);
+	printf("\nString Read from Arduino: %s\n", buf);
+	fscanf(buf, "%d", &arduino_id);
+	fscanf(buf, "%lf", &motor_voltage);
+	/*
 		char str[200];
 		fgets(str, 200, file);
 		printf("\nString Read from Arduino: %s\n", str);
 		fscanf(file, "%d", &arduino_id);
-		fscanf(file, "%lf", &motor_voltage);
+		fscanf(file, "%lf", &motor_voltage); */
 		printf("arduino_id: %d motor_voltage: %lf", arduino_id, motor_voltage);
 	/*	if (tempChar == ':') {
 			if (fieldCounter == 0) {
@@ -200,7 +284,8 @@ MotorReading readFromArduino(string port, int outID) {
 		//}
         //std::this_thread::sleep_for(std::chrono::seconds(1));
 	//}
-    fclose(file);
+    //fclose(file);
+	close(fd);
 	MotorReading a1(outID, motor_voltage);
 	return a1;
 }
