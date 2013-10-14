@@ -180,9 +180,9 @@ MotorReading readFromArduino(string port, int outID) {
 	char tempChar = ' ';
 	int fieldCounter = 0;
 	//while (tempChar != '}') {
-		char* str;
+		char str[200];
 		fgets(str, 200, file);
-		printf("%s", str);
+		printf("\nString Read from Arduino: %s\n", str);
 		fscanf(file, "%d", &arduino_id);
 		fscanf(file, "%lf", &motor_voltage);
 	/*	if (tempChar == ':') {
