@@ -330,7 +330,7 @@ int main(int argc, char *argv[])
 				MotorReading mr = readFromArduino(outPorts[i], outID[i]);
 				
 				stringstream stringStream;
-				stringStream << mr.getID() << " " mr.getVolt();
+				stringStream << mr.getID() << " " << mr.getVolt();
 				string ID, voltage;
 				stringStream >> ID;
 				stringStream >> voltage;
