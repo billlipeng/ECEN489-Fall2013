@@ -180,7 +180,11 @@ MotorReading readFromArduino(string port, int outID) {
 	char tempChar = ' ';
 	int fieldCounter = 0;
 	while (tempChar != '}') {
-		fscanf(file, "%c", &tempChar); //Writing to the file
+		string temp;
+		fgets(temp.c_sstr(), file);
+		cout << temp << endl;
+		tempChar = fgetc(file);
+		//fscanf(file, "%c", &tempChar); //Writing to the file
 		if (tempChar == ':') {
 			if (fieldCounter == 0) {
 				// then we know we are getting arduino_id...BUT WE DONT CARE
