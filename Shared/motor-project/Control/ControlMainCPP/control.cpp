@@ -198,7 +198,7 @@ MotorReading readFromArduino(string port, int outID) {
 			} else cout <<"\nERROR PARSING JSON DATA\n\n"; */
 		//}
         //std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
+	//}
     fclose(file);
 	MotorReading a1(outID, motor_voltage);
 	return a1;
