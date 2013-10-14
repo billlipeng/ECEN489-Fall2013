@@ -179,13 +179,13 @@ MotorReading readFromArduino(string port, int outID) {
 	
 	char tempChar = ' ';
 	int fieldCounter = 0;
-	while (tempChar != '}') {
-		//char* temp;
-		//fgets(temp, 200, file);
-		//cout << temp << endl;
-		//tempChar = fgetc(file);
-		fscanf(file, "%c", &tempChar); //Writing to the file
-		if (tempChar == ':') {
+	//while (tempChar != '}') {
+		char* str;
+		fgets(str, 200, file);
+		printf("%s", str);
+		fscanf(file, "%d", &arduino_id);
+		fscanf(file, "%lf", &motor_voltage);
+	/*	if (tempChar == ':') {
 			if (fieldCounter == 0) {
 				// then we know we are getting arduino_id...BUT WE DONT CARE
 				fscanf(file, "%d", &arduino_id);
@@ -195,7 +195,7 @@ MotorReading readFromArduino(string port, int outID) {
 				fscanf(file, "%lf", &motor_voltage);
 				--fieldCounter; // reset field counter for next JSON object
 				break; // we break from for loop because we should have parsed both JSON data fields by now
-			} else cout <<"\nERROR PARSING JSON DATA\n\n";
+			} else cout <<"\nERROR PARSING JSON DATA\n\n"; */
 		}
         //std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
@@ -248,62 +248,6 @@ int main(int argc, char *argv[])
 
 	if (conn != NULL)
 	{
-	/*	int debug = 0;
-		cout << "DEBUG...\n";
-		cout << "1.) Getting Average Temps\n"
-			 << "2.) Writing Average Temp to Arduino\n"
-			 << "3.) Reading Motor Voltage from Arduino\n"
-			 << "4.) Insert Motor Voltage in DB\n"
-			 << "0.) Quit\n";
-		cin >> debug;
-		while (debug)
-        {
-			switch(debug)
-            {
-            case 1: {
-                AverageTemp a1 = getAVGTemp(12);
-                cout << "\n\nArduino ID: " << a1.getID() << "Average Temp: " << a1.getTemp() << "\n";
-                break;
-            }
-			case 2: {
-                writeToArduino(99, 999.9);
-                break;
-            }
-            case 3: {
-                MotorReading mrA = readFromArduino();
-                cout << "\n\nArduino ID: " << mrA.getID() << "Motor Reading: " << mrA.getVolt() << "\n";
-                break;
-            }
-            case 4: {
-                stringstream convstream;
-                convstream << 99 << " " << 999.9;
-                string arduino_id_str;
-                convstream >> arduino_id_str;
-                string voltage_str;
-                convstream >> voltage_str;
-                
-                InsertMotorRec(conn, arduino_id_str.c_str(), voltage_str.c_str());
-                break;
-            }
-            case 0: {
-                CloseConn(conn); 
-                return 0;
-            }
-            default: {
-                cerr << "Unknown choice" << endl;
-                break;
-            }
-			}
-			
-            cout << "DEBUG...\n";
-            cout << "1.) Getting Average Temps\n"
-                 << "2.) Writing Average Temp to Arduino\n"
-                 << "3.) Reading Motor Voltage from Arduino\n"
-                 << "4.) Insert Motor Voltage in DB\n"
-                 << "0.) Quit\n";
-            cin >> debug;
-        } */
-		
 		vector<int> inID;	// input arduino IDs
 		vector<int> outID;	// output arduino IDs
 		vector<string> outPorts;	// character device file for output arduinos
