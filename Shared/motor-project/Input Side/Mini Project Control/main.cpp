@@ -18,8 +18,8 @@ using namespace std;
 //how to enable pthread
 //right cklick on the project in the project explorer -> properties -> c/c++ build -> Settings -> linker -> libraries -> add -> pthread -> ok -> rebuild
 struct thread_data{
-	int thread_id;
-	char* message;
+	int comPort;
+	int comPortCorresponding;
 };
 
 bool canPrint;
@@ -30,10 +30,12 @@ void *ArduinoConnection(void *threadArgument)
 
 	cout << "Connecting to arduino..." << endl;
 
-	int comPortNumber = *((int *)threadArgument);
+	thread_data* comPortData = ((thread_data *)threadArgument);
+	cout<<"Com Port = "<<comPortData->comPort<<endl;
+	cout<<"Com Port Corresponding = "<<comPortData->comPortCorresponding<<endl;
 	string comPortNumberString = "";
 	stringstream stringStream;
-	stringStream << comPortNumber;
+	stringStream << comPortData->comPort;
 	stringStream>>comPortNumberString;
 	string comPortString = "\\\\.\\COM" + comPortNumberString;
 	cout<<"Com Port String = "<<comPortString<<endl;
@@ -44,7 +46,7 @@ void *ArduinoConnection(void *threadArgument)
 	Serial* SP = new Serial(comPortPointer);    // adjust as needed
 
 	if (SP->IsConnected())
-		cout << "Connection established with Arduino on Com Port "<<comPortNumber<<endl;
+		cout << "Connection established with Arduino on Com Port "<<comPortData->comPort<<endl;
 
 	const int dataLength = 256;
 	int readResult = 0;
@@ -73,7 +75,14 @@ void *ArduinoConnection(void *threadArgument)
 
 	while(SP->IsConnected())
 	{
-		const char *readTempInfo = "SELECT arduino_id, temp_kelvin from temp_readings WHERE arduino_id=18 ORDER BY reading_time_utc DESC NULLS LAST Limit 10";
+		stringstream stringStream;
+		string comPortCorrespondingString = "";
+		stringStream<<comPortData->comPortCorresponding;
+		stringStream >> comPortCorrespondingString;
+		string readTempString = "SELECT arduino_id, temp_kelvin from temp_readings WHERE arduino_id=";
+		readTempString += comPortCorrespondingString;
+		readTempString += " ORDER BY reading_time_utc DESC NULLS LAST Limit 10";
+		const char *readTempInfo = readTempString.c_str();
 		PGresult *TempInfo = PQexec(conn, readTempInfo);
 
 		if (PQresultStatus(TempInfo) != PGRES_TUPLES_OK) {
@@ -104,10 +113,10 @@ void *ArduinoConnection(void *threadArgument)
 		PQclear(TempInfo);
 
 		string jsonTemperature = "{ \" averageTemp \" : ";
-		stringstream stringStream;
-		stringStream<<TempSum;
+		stringstream stringStream2;
+		stringStream2<<TempSum;
 		string TempSumString = "";
-		stringStream>>TempSumString;
+		stringStream2>>TempSumString;
 		jsonTemperature += TempSumString;
 		jsonTemperature += " }";
 
@@ -140,7 +149,7 @@ void *ArduinoConnection(void *threadArgument)
 					canPrint = false;
 					Reading reading = Reading(incomingData);
 					cout<<"Motor Voltage = "<<reading.GetMotorVoltage()<<"       "<<reading.GetErrorMessage()<<endl;
-					cout <<"ComPort = "<<comPortNumber<<endl<<endl;
+					cout <<"ComPort = "<<comPortData->comPort<<endl<<endl;
 					canPrint = true;
 					working = false;
 
@@ -152,7 +161,7 @@ void *ArduinoConnection(void *threadArgument)
 
 						// Print the data values into the arrays
 						stringstream valstream;
-						valstream << comPortNumber << " "
+						valstream << comPortData->comPort << " "
 								<< reading.GetMotorVoltage();
 						string arduino_id_string;
 						string motorVoltageString;
@@ -210,7 +219,7 @@ void *ArduinoConnection(void *threadArgument)
 
 
 
-		Sleep(10);
+		Sleep(20);
 	}
 
 	PQfinish(conn);
@@ -239,12 +248,24 @@ int _tmain(int argc, _TCHAR* argv[])
 		comPorts.push_back(comPort);
 	}
 
+	vector<int> comPortsCorresponding;
+	for(int i = 0; i < numberOfArduinos; i++)
+	{
+		cout<<"Please enter the Corresponding Com Port for arduino "<<i+1<<":";
+		int comPortCorresponding;
+		cin>>comPortCorresponding;
+		comPortsCorresponding.push_back(comPortCorresponding);
+	}
+
 	vector<pthread_t> threads;
 	struct thread_data threadData;
 	for(int i = 0; i < numberOfArduinos; i++)
 	{
 		threads.push_back(pthread_t());
-		int notSuccessful = pthread_create(&threads[i], NULL, ArduinoConnection, (void*)&comPorts[i]);
+		thread_data* threadData = new thread_data;
+		threadData->comPort = comPorts[i];
+		threadData->comPortCorresponding = comPortsCorresponding[i];
+		int notSuccessful = pthread_create(&threads[i], NULL, ArduinoConnection, (void*)threadData);
 
 		if(notSuccessful)
 			cout<<"Error Creating Thread For Com Port "<<comPorts[i]<<endl;
