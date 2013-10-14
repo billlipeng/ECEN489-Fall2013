@@ -185,6 +185,7 @@ MotorReading readFromArduino(string port, int outID) {
 		printf("\nString Read from Arduino: %s\n", str);
 		fscanf(file, "%d", &arduino_id);
 		fscanf(file, "%lf", &motor_voltage);
+		printf("arduino_id: %d motor_voltage: %lf", arduino_id, motor_voltage);
 	/*	if (tempChar == ':') {
 			if (fieldCounter == 0) {
 				// then we know we are getting arduino_id...BUT WE DONT CARE
