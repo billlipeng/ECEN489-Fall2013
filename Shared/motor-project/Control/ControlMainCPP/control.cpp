@@ -327,7 +327,7 @@ int main(int argc, char *argv[])
 			for (int i = 0; i < inID.size(); ++i) {
 				AverageTemp at = getAvgTemp(inID[i]);
 				writeToArduino(inID, outID, at.getID(), at.getTemp());
-				//MotorReading mr = readFromArduino(outPorts[i], outID[i]);
+				MotorReading mr = readFromArduino(outPorts[i], outID[i]);
 				InsertMotorRec(conn, mr.getID(), mr.getVolt());
 			}
 		}
