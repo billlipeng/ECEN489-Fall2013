@@ -1,0 +1,75 @@
+\documentclass{article}
+
+\usepackage[paper=letterpaper, margin=1in]{geometry}
+
+\usepackage{tikz}
+
+
+\usepackage{siunitx}
+
+\title{Progress Report: Week 1}
+\author{LASER Mapping Team}
+\date{25 October 2013}
+
+\begin{document}
+\maketitle
+
+\section{Project Block Diagram}
+
+The project naturally splits along the hardware-software divide.  There are
+further natural subdivisions on both the hardware and software components
+(Figure \ref{fig:project-block-diagram}).  The hardware is split into three
+components --- the analog laser modulation / phase measurement circuit, the
+Inertial Measurement Unit (IMU) and its support circuitry, and the
+microcontroller that aggregates the information and transmits it to the PC.  The
+software can be structured as a pipeline:
+\begin{enumerate}
+\item decode the ranging and position integration information coming from the
+  hardware,
+\item transform the measurements from the hardware's egocentric frame to a
+  common world frame,
+\item visualize the measurements in the common world frame, and
+\item (possibly) lift a representation of the scanned object from the common
+  world frame.
+\end{enumerate}
+
+\begin{figure}
+  \input{project-block-diagram.tikz}
+  \caption{Block representation of the project.}
+  \label{fig:project-block-diagram}
+\end{figure}
+
+\section{Member Assignments}
+
+\begin{itemize}
+\item Hardware
+  \begin{itemize}
+  \item Laser Modulation / Phase Measurement: Jeff Terrel, John Boyd, Doug
+    Maunder
+  \item IMU: Ashton Jackson, Sam Carey
+  \item Microprocessor: Clayton Crawford, Sam Carey, Taahir Ahmed
+  \end{itemize}
+\item Software
+  \begin{itemize}
+  \item Pose Transform: Clayton Crawford
+  \item Visualization: Tengyan Wang
+  \end{itemize}
+\end{itemize}
+
+\section{Four-Week Timeline}
+
+\begin{enumerate}
+\item \emph{1 November 2013:} All hardware schematics finished.  PCB layouts
+  finished.  First PCB revision produced.  Software pose transformation and
+  simple visualization working on test fixture data.
+\item \emph{8 November 2013:} Hardware subunits debugged, second board revision
+  layed out and in production.  Tentative microcontroller control of the board.
+  Pose transformation and visualization working on test data produced on the
+  microcontroller.  Progress on model lifting.
+\item \emph{15 November 2013:} Full microcontroller control of the board, data
+  passing through the full pipeline.  Planar scanning assembly produced and
+  integrated.  Model lifting working.
+\item \emph{22 November 2013:} Schedule slack.
+\end{enumerate}
+
+\end{document}
