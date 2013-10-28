@@ -1,4 +1,4 @@
-update=Sun 27 Oct 2013 06:21:44 PM CDT
+update=Sun 27 Oct 2013 10:17:02 PM CDT
 version=1
 last_client=eeschema
 [cvpcb]
@@ -84,3 +84,4 @@ LibName27=opto
 LibName28=atmel
 LibName29=contrib
 LibName30=valves
+LibName31=at90usb1286
