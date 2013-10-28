@@ -3,7 +3,7 @@
 \usepackage[paper=letterpaper, margin=1in]{geometry}
 
 \usepackage{tikz}
-
+\usetikzlibrary{shapes,arrows,fit}
 
 \usepackage{siunitx}
 
@@ -34,8 +34,14 @@ software can be structured as a pipeline:
 \end{enumerate}
 
 \begin{figure}
+  \centering
   \input{project-block-diagram.tikz}
-  \caption{Block representation of the project.}
+  \caption{Block representation of project dataflow.  Sensed data originates on
+    the indicated \textcolor{blue}{hardware components}.  The data is processed
+    and assembled into tuples on the \textcolor{red}{microcontroller}, and
+    transmitted over the USB connection.  On the attached computer, the
+    \textcolor{green}{software pipeline} performs pose normalization, model
+    lifting, and visualization.}
   \label{fig:project-block-diagram}
 \end{figure}
 
@@ -63,7 +69,7 @@ software can be structured as a pipeline:
   finished.  First PCB revision produced.  Software pose transformation and
   simple visualization working on test fixture data.
 \item \emph{8 November 2013:} Hardware subunits debugged, second board revision
-  layed out and in production.  Tentative microcontroller control of the board.
+  laid out and in production.  Tentative microcontroller control of the board.
   Pose transformation and visualization working on test data produced on the
   microcontroller.  Progress on model lifting.
 \item \emph{15 November 2013:} Full microcontroller control of the board, data
@@ -71,5 +77,49 @@ software can be structured as a pipeline:
   integrated.  Model lifting working.
 \item \emph{22 November 2013:} Schedule slack.
 \end{enumerate}
+
+\section{Component Statuses}
+
+\subsection{Ranger}
+All components have been selected and ordered.  The laser diode will be driven
+directly by a programmable oscillator (frequency controlled by
+I\textsuperscript{2}C from the microcontroller).  The original signal and the
+phototransistor return will be fed into the phase comparator, which outputs
+analog representations of the detected phase difference and attenuation.  These
+analog signals will be sampled by the dedicated analog to digital converter pins
+on the microcontroller.
+
+Schematic capture of the ranger unit has begun and is on-track.
+
+\subsection{IMU}
+Both a self-contained chip and a stand-in module (Razor IMU, from SparkFun) have
+been identified.  Pads will be placed on the board revision a for both units.
+The dedicated chip is accessed via I\textsuperscript{2}C, while the Razor IMU is
+accessed via UART.
+
+\subsection{Microcontroller}
+The AT90USB1286 from Atmel has been selected as the on-board microcontroller.
+Its relevant features are:
+\begin{itemize}
+\item dedicated I\textsuperscript{2}C and USART (Universal
+Synchronous and Asynchronous Receiver and Transmitter) controllers,
+\item dedicated USB stack (allowing direct implementation of a USB-to-Serial
+  converter, as well as more apropos USB communication standards),
+\item 8 dedicated analog to digital converters, as well as a selection of analog
+  comparators,
+\item on-chip USB bootloader, enabling simple programming over a direct USB
+  connection,
+\item 16 external interrupts, to allow interfacing with pulse devices such as
+  encoders.
+\end{itemize}
+The Atmel requires some on-board support circuitry, but an open reference design
+has been located and schematic capture has begun.
+
+\subsection{Pose Transformation}
+The math has been worked out, and implementation is under way.
+
+\subsection{Visualization}
+A simple visualization program for visualizing the returned point cloud has been
+created.
 
 \end{document}

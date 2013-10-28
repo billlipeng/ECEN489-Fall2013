@@ -1,0 +1,82 @@
+
+% Needs shapes, arrows, and fit libraries.
+
+\begin{tikzpicture}[auto, node distance=3cm, >=latex']
+
+% sensor style
+\tikzstyle{sn} = [
+    draw,
+    fill=blue!20,
+    rectangle,
+    minimum height=3em,
+    minimum width=6em
+]
+
+% microcontroller style
+\tikzstyle{uc} = [
+    draw,
+    fill = red!20,
+    rectangle,
+    minimum height=3em,
+    minimum width=6em
+];
+
+% PC Style
+\tikzstyle{pc} = [
+    draw,
+    fill = green!20,
+    rectangle,
+    minimum height = 3em,
+    minimum width = 6em
+]
+
+% Place the nodes.
+\matrix [row sep = 1em, column sep = 4em]
+{
+    \node [sn] (encoder) {Encoder};
+    & \node [uc] (enc-int) {$\int$};
+    &                             
+    &                         
+    \\
+    
+    \node [sn] (ranger) {Ranger};
+    &
+    & \node [uc] (tuple) {Tuple};
+    & \node [uc] (usb) {USB};
+    & \coordinate (exit);
+    \\
+    
+    \node [sn] (imu) {IMU};
+    & \node [uc] (imu-int) {$\int$};
+    &                             
+    &                         
+    \\
+    
+    &&&&\\
+
+    \coordinate (pc-entry);
+    & \node [pc] (pose) {Pose Transform};
+    & \node [pc] (viz) {Visualization};
+    &
+    &
+    \\ 
+};
+
+% Connect the nodes.
+\draw [->] (encoder) -- node {Pulse} (enc-int);
+\draw [->] (ranger) -- node {$r$} (tuple);
+\draw [->] (imu) -- node {$a, \alpha$} (imu-int);
+\draw [->] (enc-int) -- node {$\theta$} (tuple);
+\draw [->] (imu-int) -- node {Pose} (tuple);
+\draw [->] (tuple) -- (usb);
+\draw [->] (usb) -- node {To PC} (exit);
+
+\draw [->] (pc-entry) -- node {From HW} (pose);
+\draw [->] (pose) -- (viz);
+
+% Draw fitting boxes.
+\node[draw, fit= (encoder) (ranger) (imu), label=above:{Hardware Components}] {};
+\node[draw, fit= (enc-int) (imu-int) (tuple) (usb), label=above:{Microcontroller Code / Special Functions}] {};
+\node[draw, fit= (pose) (viz), label=below:{Software Modules}] {};
+
+\end{tikzpicture}
