@@ -66,21 +66,21 @@ int main () {
   	srand(time(NULL));
   	FILE *f = fopen("PoseTransInput", "w");
   	for (int i = 0; i < 5; ++i) {
-  		poseTransInput["x1\'"] = rand() % 10;
-  		poseTransInput["x2\'"] = rand() % 10;
-  		poseTransInput["x3\'"] = rand() % 10;
-  		poseTransInput["y1\'"] = rand() % 10;
-  		poseTransInput["y2\'"] = rand() % 10;
-  		poseTransInput["y3\'"] = rand() % 10;
-  		poseTransInput["z1\'"] = rand() % 10;
-  		poseTransInput["z2\'"] = rand() % 10;
-  		poseTransInput["z3\'"] = rand() % 10;
-  		poseTransInput["r1"] = rand() % 10;
-  		poseTransInput["r2"] = rand() % 10;
-  		poseTransInput["r3"] = rand() % 10;
-  		poseTransInput["l1"] = rand() % 10;
-  		poseTransInput["l2"] = rand() % 10;
-  		poseTransInput["l3"] = rand() % 10;
+  		poseTransInput["x1\'"] = rand() %10 + 1;
+  		poseTransInput["x2\'"] = rand() %10 + 1;
+  		poseTransInput["x3\'"] = rand() %10 + 1;
+  		poseTransInput["y1\'"] = rand() %10 + 1;
+  		poseTransInput["y2\'"] = rand() %10 + 1;
+  		poseTransInput["y3\'"] = rand() %10 + 1;
+  		poseTransInput["z1\'"] = rand() %10 + 1;
+  		poseTransInput["z2\'"] = rand() %10 + 1;
+  		poseTransInput["z3\'"] = rand() %10 + 1;
+  		poseTransInput["r1"] = rand() %10 + 1;
+  		poseTransInput["r2"] = rand() %10 + 1;
+  		poseTransInput["r3"] = rand() %10 + 1;
+  		poseTransInput["l1"] = rand() %10 + 1;
+  		poseTransInput["l2"] = rand() %10 + 1;
+  		poseTransInput["l3"] = rand() %10 + 1;
 
   		StyledWriter fw;
   		string poseInputJSON = fw.write(poseTransInput);
@@ -158,21 +158,21 @@ int main () {
   		// create 4x4 pose matrix
   		cout << "\nCreating 4x4 pose matrix...\n";
   		// column 0 is x'
-  		pose(0,0) = JSONobjsVector[i].get("x\'1", 0).asInt();
-  		pose(1,0) = JSONobjsVector[i].get("x\'2", 0).asInt();
-  		pose(2,0) = JSONobjsVector[i].get("x\'3", 0).asInt();
+  		pose(0,0) = JSONobjsVector[i].get("x1\'", -1).asInt();
+  		pose(1,0) = JSONobjsVector[i].get("x2\'", -1).asInt();
+  		pose(2,0) = JSONobjsVector[i].get("x3\'", -1).asInt();
   		pose(3,0) = 0;
 
   		// column 1 is y'
-  		pose(0,1) = JSONobjsVector[i].get("y\'1", 0).asInt();
-  		pose(1,1) = JSONobjsVector[i].get("y\'2", 0).asInt();
-  		pose(2,1) = JSONobjsVector[i].get("y\'3", 0).asInt();
+  		pose(0,1) = JSONobjsVector[i].get("y1\'", -1).asInt();
+  		pose(1,1) = JSONobjsVector[i].get("y2\'", -1).asInt();
+  		pose(2,1) = JSONobjsVector[i].get("y3\'", -1).asInt();
   		pose(3,1) = 0;
 
   		// column 2 is z'
-  		pose(0,2) = JSONobjsVector[i].get("z\'1", -1).asInt();
-  		pose(1,2) = JSONobjsVector[i].get("z\'2", -1).asInt();
-  		pose(2,2) = JSONobjsVector[i].get("z\'3", -1).asInt();
+  		pose(0,2) = JSONobjsVector[i].get("z1\'", -1).asInt();
+  		pose(1,2) = JSONobjsVector[i].get("z2\'", -1).asInt();
+  		pose(2,2) = JSONobjsVector[i].get("z3\'", -1).asInt();
   		pose(3,2) = 0;
 
   		// column 3 is r vector
