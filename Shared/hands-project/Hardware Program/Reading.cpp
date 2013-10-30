@@ -76,11 +76,17 @@ void Reading::ValidateJson(string input)
 	_errorMessage = "";
 
 	TestString("#A-C=",input);
-	_accelerationXAxis = GetNextDouble(input);
-	TestString(",",input);
-	_accelerationYAxis = GetNextDouble(input);
-	TestString(",",input);
-	_accelerationZAxis = GetNextDouble(input);
+		_accelerationXAxis = GetNextDouble(input);
+		TestString(",",input);
+		_accelerationYAxis = GetNextDouble(input);
+		TestString(",",input);
+		_accelerationZAxis = GetNextDouble(input);
+	TestString("#M-C=",input);
+		_ya = GetNextDouble(input);
+		TestString(",",input);
+		_pitch = GetNextDouble(input);
+		TestString(",",input);
+		_roll = GetNextDouble(input);
 
 	_validReading = _errorMessage == "";
 }
@@ -123,4 +129,19 @@ double Reading::GetAccelerationYAxis()
 double Reading::GetAccelerationZAxis()
 {
 	return _accelerationZAxis;
+}
+
+double Reading::GetYa()
+{
+	return _ya;
+}
+
+double Reading::GetPitch()
+{
+	return _pitch;
+}
+
+double Reading::GetRoll()
+{
+	return _roll;
 }

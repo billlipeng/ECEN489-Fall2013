@@ -17,6 +17,9 @@ public:
 	double GetAccelerationXAxis();
 	double GetAccelerationYAxis();
 	double GetAccelerationZAxis();
+	double GetYa();
+	double GetPitch();
+	double GetRoll();
 	int GetArduinoId();
 	time_t GetTime();
 	string GetErrorMessage();
@@ -31,6 +34,9 @@ private:
 	double _accelerationXAxis;
 	double _accelerationYAxis;
 	double _accelerationZAxis;
+	double _ya;
+	double _pitch;
+	double _roll;
 	time_t _time; 
 	int _arduinoId;
 	string _errorMessage;
