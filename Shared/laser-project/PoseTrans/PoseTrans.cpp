@@ -1,5 +1,5 @@
 /* 
-*	This program uses the Armadillo linear algrebra library
+*	This program uses the Armadillo linear algebra library
 *	for the matrix math operations and the jsoncpp
 *	JSON library for outputting data to the Visualization module.
 */
@@ -64,7 +64,8 @@ int main () {
   	Value poseTransInput;
 
   	srand(time(NULL));
-  	for (int i = 0; i < 50; ++i) {
+  	FILE *f = fopen("PoseTransInput", "w");
+  	for (int i = 0; i < 5; ++i) {
   		poseTransInput["x1\'"] = rand() % 10;
   		poseTransInput["x2\'"] = rand() % 10;
   		poseTransInput["x3\'"] = rand() % 10;
@@ -84,19 +85,19 @@ int main () {
   		StyledWriter fw;
   		string poseInputJSON = fw.write(poseTransInput);
 
-  		FILE *f = fopen("PoseTransInput", "a");
   		if (f == NULL) {
   			printf("\nError opening file!\n");
   			exit(1);
   		}
   		fprintf(f, "%s", poseInputJSON.c_str());
-  		fclose(f);
   	}
+  	fclose(f);
 
   	/*	The following code is testing reading JSON data from an input file,
 	*	creating JSON objects from that data, and then outputting the new
 	*	JSON objects to a separate file.		
 	*/
+
   	Value PoseJSONobj;
   	Reader reader;
   	ifstream ifs;
@@ -130,7 +131,7 @@ int main () {
 
   	StyledWriter sw;
   	for (int i = 0; i < JSONobjsVector.size(); ++i) {
-  		cout << sw.write(JSONobjsVector[i]);
+  		cout << "JSON Object " << i << ": \n" << sw.write(JSONobjsVector[i]);
   		fprintf(out, "%s", sw.write(JSONobjsVector[i]).c_str());
   	}
   	fclose(out);
@@ -144,6 +145,8 @@ int main () {
   	mat pose(4,4);
   	mat vec(4,1);
   	mat newPose(4,1);
+
+  	vector<mat> vectorTransMatrix;
 
   	FILE *o = fopen("PoseTransOutput", "w");
 	if (o == NULL) {
@@ -167,22 +170,22 @@ int main () {
   		pose(3,1) = 0;
 
   		// column 2 is z'
-  		pose(0,2) = JSONobjsVector[i].get("z\'1", 0).asInt();
-  		pose(1,2) = JSONobjsVector[i].get("z\'2", 0).asInt();
-  		pose(2,2) = JSONobjsVector[i].get("z\'3", 0).asInt();
+  		pose(0,2) = JSONobjsVector[i].get("z\'1", -1).asInt();
+  		pose(1,2) = JSONobjsVector[i].get("z\'2", -1).asInt();
+  		pose(2,2) = JSONobjsVector[i].get("z\'3", -1).asInt();
   		pose(3,2) = 0;
 
   		// column 3 is r vector
-  		pose(0,3) = JSONobjsVector[i].get("r1", 0).asInt();
-  		pose(1,3) = JSONobjsVector[i].get("r2", 0).asInt();
-  		pose(2,3) = JSONobjsVector[i].get("r3", 0).asInt();
+  		pose(0,3) = JSONobjsVector[i].get("r1", -1).asInt();
+  		pose(1,3) = JSONobjsVector[i].get("r2", -1).asInt();
+  		pose(2,3) = JSONobjsVector[i].get("r3", -1).asInt();
   		pose(3,3) = 1;
 
   		cout << "Creating 4x1 vector matrix...\n";
   		// create 4x1 vector matrix
-  		vec(0,0) = JSONobjsVector[i].get("l1", 0).asInt();
-  		vec(1,0) = JSONobjsVector[i].get("l2", 0).asInt();
-  		vec(2,0) = JSONobjsVector[i].get("l3", 0).asInt();
+  		vec(0,0) = JSONobjsVector[i].get("l1", -1).asInt();
+  		vec(1,0) = JSONobjsVector[i].get("l2", -1).asInt();
+  		vec(2,0) = JSONobjsVector[i].get("l3", -1).asInt();
   		vec(3,0) = 1;
 
   		newPose = pose * vec;
@@ -195,12 +198,20 @@ int main () {
   		newPoseJSON["z"] = newPose(2,0);
   		newPoseJSON["constant"] = newPose(3,0);
 
+  		// store each product matrix in a C++ vector
+  		vectorTransMatrix.push_back(newPose);
+
   		// output JSON data to file
 	  	StyledWriter sw;
 	  	fprintf(o, "%s", sw.write(newPoseJSON).c_str());
+	  	cout << "Matrix Set " << i << ": \n" << pose << endl << vec;
 	} 
 	fclose(o);
 
+	// output product matrices from C++ vector
+	for (int i = 0; i < vectorTransMatrix.size(); ++i) {
+		cout << "Vector " << i << ":\n" << vectorTransMatrix[i] << endl;
+	}
 
   	return 0;
 }
