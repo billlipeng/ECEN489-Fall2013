@@ -75,7 +75,7 @@ void Reading::ValidateJson(string input)
 {
 	_validReading = false;
 	_errorMessage = "";
-
+/*
 	bool dontContinue = true;
 	while(dontContinue)
 	{
@@ -84,10 +84,9 @@ void Reading::ValidateJson(string input)
 		else
 			dontContinue = false;
 	}
+*/
 
-	TestString("READGING",input);
-
-	TestString("\r\n#YPR=",input);
+	TestString("#YPR=",input);
 		_ya = GetNextDouble(input);
 		TestString(",",input);
 		_pitch = GetNextDouble(input);

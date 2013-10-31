@@ -11,6 +11,7 @@
 #include <vector>
 #include <sstream>
 #include <libpq-fe.h>
+#include <conio.h>
 
 using namespace std;
 
@@ -52,7 +53,9 @@ void *ArduinoConnection(void *threadArgument)
 	const int dataLength = 256;
 	int readResult = 0;
 
-	cout<<"here 1"<<endl;
+	//char dataToWrite[1] = {'2'};
+	//SP->WriteData(dataToWrite, 1);
+
 	PGconn *conn = PQconnectdb("host=fulla.ece.tamu.edu dbname=hand user=hand_user password=hand_password");
 	if(PQstatus(conn) != CONNECTION_OK)
 	{
@@ -60,10 +63,10 @@ void *ArduinoConnection(void *threadArgument)
 		PQfinish(conn);
 		return nullptr;
 	}
-	cout<<"here 2"<<endl;
+
 	while(SP->IsConnected())
 	{
-		cout<<"Should be reading"<<endl;
+		system("cls");
 		char incomingData[dataLength] = "";
 
 		readResult = SP->ReadData(incomingData,dataLength);
@@ -109,7 +112,7 @@ void *ArduinoConnection(void *threadArgument)
 						string rollString = "";
 						stringStream >> rollString;
 
-						string sqlCommand = "INSERT INTO imu_moving_up_then_down";
+						string sqlCommand = "INSERT INTO imu_moving_up_then_down_on_hand";
 												sqlCommand += "(acceleration_x, acceleration_y, acceleration_z, ya, pitch, roll, time_stamp)";
 												sqlCommand += " VALUES (";
 												sqlCommand += accelerationXAxisString;
@@ -138,7 +141,6 @@ void *ArduinoConnection(void *threadArgument)
 							return NULL;
 						}
 
-						// Clean up the command result
 						PQclear(op_result);
 
 					}
@@ -149,10 +151,10 @@ void *ArduinoConnection(void *threadArgument)
 		}
 
 
-		//char dataToWrite[1] = {'1'};
-		//SP->WriteData(dataToWrite, 1);
+		char dataToWrite[1] = {'1'};
+		SP->WriteData(dataToWrite, 1);
 
-		Sleep(20);
+		Sleep(35);
 	}
 
 	 PQfinish(conn);

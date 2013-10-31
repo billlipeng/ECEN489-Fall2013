@@ -169,7 +169,7 @@ int MBIZZLE = 0;
 // OUTPUT OPTIONS
 /*****************************************************************/
 // Set your serial port baud rate used to send out data here!
-#define OUTPUT__BAUD_RATE 115200//57600
+#define OUTPUT__BAUD_RATE 57600
 
 // Sensor data output interval in milliseconds
 // This may not work, if faster than 20ms (=50Hz)
@@ -214,47 +214,47 @@ boolean output_errors = false;  // true or false
 // How to calibrate? Read the tutorial at http://dev.qu.tu-berlin.de/projects/sf-razor-9dof-ahrs
 // Put MIN/MAX and OFFSET readings for your board here!
 // Accelerometer
-// "accel x,y,z (min/max) = X_MIN/X_MAX  Y_MIN/Y_MAX  Z_MIN/Z_MAX"
-#define ACCEL_X_MIN ((float) -250)
-#define ACCEL_X_MAX ((float) 250)
-#define ACCEL_Y_MIN ((float) -250)
-#define ACCEL_Y_MAX ((float) 250)
-#define ACCEL_Z_MIN ((float) -250)
-#define ACCEL_Z_MAX ((float) 250)
-
+// "accel x,y,z (min/max) = X_MIN/X_MAX Y_MIN/Y_MAX Z_MIN/Z_MAX"
+#define ACCEL_X_MIN ((float) -310)
+#define ACCEL_X_MAX ((float) 276)
+#define ACCEL_Y_MIN ((float) -303)
+#define ACCEL_Y_MAX ((float) 318)
+#define ACCEL_Z_MIN ((float) -317)
+#define ACCEL_Z_MAX ((float) 221)
+ 
 // Magnetometer (standard calibration mode)
-// "magn x,y,z (min/max) = X_MIN/X_MAX  Y_MIN/Y_MAX  Z_MIN/Z_MAX"
-#define MAGN_X_MIN ((float) -600)
-#define MAGN_X_MAX ((float) 600)
-#define MAGN_Y_MIN ((float) -600)
-#define MAGN_Y_MAX ((float) 600)
-#define MAGN_Z_MIN ((float) -600)
-#define MAGN_Z_MAX ((float) 600)
-
+// "magn x,y,z (min/max) = X_MIN/X_MAX Y_MIN/Y_MAX Z_MIN/Z_MAX"
+#define MAGN_X_MIN ((float) -479)
+#define MAGN_X_MAX ((float) 559)
+#define MAGN_Y_MIN ((float) -421)
+#define MAGN_Y_MAX ((float) 578)
+#define MAGN_Z_MIN ((float) -509)
+#define MAGN_Z_MAX ((float) 418)
+ 
 // Magnetometer (extended calibration mode)
 // Uncommend to use extended magnetometer calibration (compensates hard & soft iron errors)
 //#define CALIBRATION__MAGN_USE_EXTENDED true
 //const float magn_ellipsoid_center[3] = {0, 0, 0};
 //const float magn_ellipsoid_transform[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-
+ 
 // Gyroscope
-// "gyro x,y,z (current/average) = .../OFFSET_X  .../OFFSET_Y  .../OFFSET_Z
-#define GYRO_AVERAGE_OFFSET_X ((float) 0.0)
-#define GYRO_AVERAGE_OFFSET_Y ((float) 0.0)
-#define GYRO_AVERAGE_OFFSET_Z ((float) 0.0)
-
+// "gyro x,y,z (current/average) = .../OFFSET_X .../OFFSET_Y .../OFFSET_Z
+#define GYRO_AVERAGE_OFFSET_X ((float) -15.18)
+#define GYRO_AVERAGE_OFFSET_Y ((float) -55.27)
+#define GYRO_AVERAGE_OFFSET_Z ((float) 0.23)
+ 
 /*
 // Calibration example:
-
-// "accel x,y,z (min/max) = -277.00/264.00  -256.00/278.00  -299.00/235.00"
+ 
+// "accel x,y,z (min/max) = -277.00/264.00 -256.00/278.00 -299.00/235.00"
 #define ACCEL_X_MIN ((float) -277)
 #define ACCEL_X_MAX ((float) 264)
 #define ACCEL_Y_MIN ((float) -256)
 #define ACCEL_Y_MAX ((float) 278)
 #define ACCEL_Z_MIN ((float) -299)
 #define ACCEL_Z_MAX ((float) 235)
-
-// "magn x,y,z (min/max) = -511.00/581.00  -516.00/568.00  -489.00/486.00"
+ 
+// "magn x,y,z (min/max) = -511.00/581.00 -516.00/568.00 -489.00/486.00"
 //#define MAGN_X_MIN ((float) -511)
 //#define MAGN_X_MAX ((float) 581)
 //#define MAGN_Y_MIN ((float) -516)
@@ -506,7 +506,7 @@ void setup()
   Gyro_Init();
   
   // Read sensors, init DCM algorithm
-  delay(20);  // Give sensors enough time to collect data
+  //delay(20);  // Give sensors enough time to collect data
   reset_sensor_fusion();
 
   // Init output
@@ -645,7 +645,7 @@ void loop()
       Drift_correction();
       Euler_angles();
       
-      if (output_stream_on || output_single_on) {MBIZZLE = MBIZZLE + 1;Serial.println("READGING");output_angles();output_sensors();}
+      if (output_stream_on || output_single_on) {output_angles();output_sensors();}
     }
     else  // Output sensor values
     {      
@@ -665,4 +665,30 @@ void loop()
     Serial.println("waiting...");
   }
 #endif
+
+  boolean cont = false;
+  while(cont == false)
+  {
+    if(Serial.available() > 0)
+    {
+      char c = Serial.read();
+      if(c == '1')
+        cont = true;/*
+      else if(c == '2')
+      {
+        cont = true;
+        delay(100);  // Give sensors enough time to start
+        I2C_Init();
+        Accel_Init();
+        Magn_Init();
+        Gyro_Init();
+      }*/
+      else
+        delay(5);
+    }
+    else
+      delay(5);
+  }
+
+  
 }
