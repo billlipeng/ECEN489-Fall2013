@@ -30,7 +30,7 @@ void Reading::TestString(string testString, string& s)
 
 	s = resultingString;
 
-	if (testString != stringFromS)
+	if (testString != stringFromS & _errorMessage == "")
 		_errorMessage = "Test: [" + testString + "] did not pass! :(";
 }
 
@@ -51,7 +51,8 @@ double Reading::GetNextDouble(string& s)
 
 	if(doubleString == "")
 	{
-		_errorMessage = "Incapable of storing double";
+		if(_errorMessage == "")
+			_errorMessage = "Incapable of storing double";
 		return -1000000;
 	}
 
@@ -75,18 +76,30 @@ void Reading::ValidateJson(string input)
 	_validReading = false;
 	_errorMessage = "";
 
-	TestString("#A-C=",input);
-		_accelerationXAxis = GetNextDouble(input);
-		TestString(",",input);
-		_accelerationYAxis = GetNextDouble(input);
-		TestString(",",input);
-		_accelerationZAxis = GetNextDouble(input);
-	TestString("#M-C=",input);
+	bool dontContinue = true;
+	while(dontContinue)
+	{
+		if(input[0] != 'R')
+			input.erase(0,1);
+		else
+			dontContinue = false;
+	}
+
+	TestString("READGING",input);
+
+	TestString("\r\n#YPR=",input);
 		_ya = GetNextDouble(input);
 		TestString(",",input);
 		_pitch = GetNextDouble(input);
 		TestString(",",input);
 		_roll = GetNextDouble(input);
+
+	TestString("\r\n#A-C=",input);
+		_accelerationXAxis = GetNextDouble(input);
+		TestString(",",input);
+		_accelerationYAxis = GetNextDouble(input);
+		TestString(",",input);
+		_accelerationZAxis = GetNextDouble(input);
 
 	_validReading = _errorMessage == "";
 }
