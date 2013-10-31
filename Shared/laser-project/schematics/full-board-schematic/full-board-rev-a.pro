@@ -1,4 +1,4 @@
-update=Sun 27 Oct 2013 10:57:53 PM CDT
+update=10/30/2013 6:44:06 PM
 version=1
 last_client=eeschema
 [cvpcb]
@@ -47,7 +47,10 @@ LibName16=valves
 version=1
 [eeschema]
 version=1
-LibDir=
+PageLayoutDescrFile=
+SubpartIdSeparator=0
+SubpartFirstId=65
+LibDir=../lib
 NetFmtName=
 RptD_X=0
 RptD_Y=100
@@ -87,3 +90,11 @@ LibName30=valves
 LibName31=at90usb1286
 LibName32=ceramic-resonator
 LibName33=mcp1825
+LibName34=lib_489
+LibName35=lib_power/power
+LibName36=lib_489/lib_489
+LibName37=lib_w_device/w_device
+LibName38=full-board-rev-a-cache
+LibName39=lib_w_opto/w_opto
+LibName40=op59x
+LibName41=op598c
