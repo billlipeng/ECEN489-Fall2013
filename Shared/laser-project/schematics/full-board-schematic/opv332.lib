@@ -1,0 +1,25 @@
+EESchema-LIBRARY Version 2.3  Date: Fri 01 Nov 2013 03:20:50 PM CDT
+#encoding utf-8
+#
+# opv332
+#
+DEF opv332 LD 0 40 N Y 1 F N
+F0 "LD" 0 50 60 H V C CNN
+F1 "opv332" 250 50 60 H V C CNN
+F2 "~" -200 200 60 H V C CNN
+F3 "~" -200 200 60 H V C CNN
+DRAW
+P 2 0 1 0  60 -110  90 -160 N
+P 2 0 1 0  90 -110  120 -160 N
+P 2 0 1 0  120 -110  150 -160 N
+P 2 0 1 0  150 -100  150 0 N
+P 3 0 1 0  80 -160  90 -160  90 -150 N
+P 3 0 1 0  110 -160  120 -160  120 -150 N
+P 3 0 1 0  140 -160  150 -160  150 -150 N
+P 4 0 1 0  50 0  50 -100  150 -50  50 0 f
+X ~ 1 0 -50 50 R 50 50 1 1 I
+X ~ 2 200 -50 50 L 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library
