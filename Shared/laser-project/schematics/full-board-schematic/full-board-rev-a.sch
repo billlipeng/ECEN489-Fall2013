@@ -40,6 +40,7 @@ LIBS:opv332
 LIBS:ad8302
 LIBS:molex-usb-b
 LIBS:push-switch
+LIBS:bss138
 LIBS:full-board-rev-a-cache
 EELAYER 27 0
 EELAYER END
@@ -47,7 +48,7 @@ $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Laser Mapping Project"
-Date "1 nov 2013"
+Date "2 nov 2013"
 Rev "A"
 Comp "Laser Team"
 Comment1 ""
@@ -197,10 +198,6 @@ Wire Wire Line
 	7250 1650 7250 1700
 Wire Wire Line
 	9350 3450 9350 3600
-Wire Wire Line
-	5800 1600 6000 1600
-Wire Wire Line
-	5800 1700 6000 1700
 NoConn ~ 8500 850 
 Wire Wire Line
 	8900 2700 9150 2700
@@ -677,7 +674,7 @@ osc_ctrl0
 Text Label 6050 3500 0    60   ~ 0
 osc_ctrl1
 Wire Wire Line
-	1150 3950 1150 4050
+	1150 3950 1150 4200
 Wire Wire Line
 	600  4050 1250 4050
 Wire Wire Line
@@ -728,7 +725,7 @@ F 0 "R6" V 2000 4150 60  0000 C CNN
 F 1 "SMRES" H 2150 4350 60  0001 C CNN
 F 2 "~" H 1600 4600 60  0000 C CNN
 F 3 "~" H 1600 4600 60  0000 C CNN
-F 4 "91k" V 1900 4125 60  0000 C CNN "Resistance"
+F 4 "750k" V 1900 4100 60  0000 C CNN "Resistance"
 	1    1850 4300
 	0    -1   -1   0   
 $EndComp
@@ -740,7 +737,7 @@ F 0 "R7" V 2000 4500 60  0000 C CNN
 F 1 "SMRES" H 2150 4700 60  0001 C CNN
 F 2 "~" H 1600 4950 60  0000 C CNN
 F 3 "~" H 1600 4950 60  0000 C CNN
-F 4 "13k" V 1900 4475 60  0000 C CNN "Resistance"
+F 4 "68k" V 1900 4475 60  0000 C CNN "Resistance"
 	1    1850 4650
 	0    -1   -1   0   
 $EndComp
@@ -828,36 +825,6 @@ Text Label 2200 2500 0    60   ~ 0
 usb_d-
 Text Label 2200 2600 0    60   ~ 0
 usb_d+
-$Comp
-L USB-B CON2
-U 1 1 52743649
-P 1750 850
-F 0 "CON2" H 1700 950 60  0000 C CNN
-F 1 "USB-B" H 1750 350 60  0000 C CNN
-F 2 "~" H 1550 1050 60  0000 C CNN
-F 3 "~" H 1550 1050 60  0000 C CNN
-	1    1750 850 
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR?
-U 1 1 52743654
-P 2050 1400
-F 0 "#PWR?" H 2050 1400 30  0001 C CNN
-F 1 "GND" H 2050 1330 30  0001 C CNN
-F 2 "" H 2050 1400 60  0000 C CNN
-F 3 "" H 2050 1400 60  0000 C CNN
-	1    2050 1400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1950 1200 2050 1200
-Wire Wire Line
-	2050 1200 2050 1400
-Wire Wire Line
-	1950 900  2450 900 
-Text Label 2150 900  0    60   ~ 0
-usb_5V
 $Comp
 L SMCAP C12
 U 1 1 52743812
@@ -998,4 +965,154 @@ Wire Wire Line
 	9350 3300 9350 2600
 Wire Wire Line
 	9350 2600 8900 2600
+$Comp
+L SMCAP C14
+U 1 1 52746D59
+P 1100 4350
+F 0 "C14" V 1250 4450 60  0000 C CNN
+F 1 "SMCAP" H 1350 4400 60  0001 C CNN
+F 2 "~" H 900 4550 60  0000 C CNN
+F 3 "~" H 900 4550 60  0000 C CNN
+F 4 "1u" V 1100 4450 60  0000 C CNN "Capacitance"
+	1    1100 4350
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1150 4350 1150 4500
+Wire Wire Line
+	1150 4500 1350 4500
+Connection ~ 1350 4500
+Wire Wire Line
+	1150 5600 1150 5850
+Wire Wire Line
+	600  5700 1250 5700
+Wire Wire Line
+	1250 5700 1250 5600
+Connection ~ 1150 5700
+Text Label 600  5700 0    60   ~ 0
+usb_5V
+$Comp
+L GND #PWR?
+U 1 1 52746E9E
+P 1350 6450
+F 0 "#PWR?" H 1350 6450 30  0001 C CNN
+F 1 "GND" H 1350 6380 30  0001 C CNN
+F 2 "" H 1350 6450 60  0000 C CNN
+F 3 "" H 1350 6450 60  0000 C CNN
+	1    1350 6450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 5600 1350 6450
+Connection ~ 1350 5850
+$Comp
+L MCP1825 U5
+U 1 1 52746EA6
+P 1050 5100
+F 0 "U5" H 1100 5150 60  0000 C CNN
+F 1 "MCP1825" H 1550 5150 60  0000 C CNN
+F 2 "~" H 1050 4900 60  0000 C CNN
+F 3 "~" H 1050 4900 60  0000 C CNN
+	1    1050 5100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1450 5600 1450 5850
+Wire Wire Line
+	1450 5850 1350 5850
+Wire Wire Line
+	1650 5600 1650 6000
+Wire Wire Line
+	1550 5600 1550 5700
+Wire Wire Line
+	1550 5700 2600 5700
+$Comp
+L SMRES R10
+U 1 1 52746EB2
+P 1850 5950
+F 0 "R10" V 2000 5750 60  0000 C CNN
+F 1 "SMRES" H 2150 6000 60  0001 C CNN
+F 2 "~" H 1600 6250 60  0000 C CNN
+F 3 "~" H 1600 6250 60  0000 C CNN
+F 4 "91k" V 1900 5775 60  0000 C CNN "Resistance"
+	1    1850 5950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SMRES R11
+U 1 1 52746EB9
+P 1850 6300
+F 0 "R11" V 2000 6100 60  0000 C CNN
+F 1 "SMRES" H 2150 6350 60  0001 C CNN
+F 2 "~" H 1600 6600 60  0000 C CNN
+F 3 "~" H 1600 6600 60  0000 C CNN
+F 4 "13k" V 1900 6125 60  0000 C CNN "Resistance"
+	1    1850 6300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 52746EBF
+P 1900 6450
+F 0 "#PWR?" H 1900 6450 30  0001 C CNN
+F 1 "GND" H 1900 6380 30  0001 C CNN
+F 2 "" H 1900 6450 60  0000 C CNN
+F 3 "" H 1900 6450 60  0000 C CNN
+	1    1900 6450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1900 6300 1900 6450
+Wire Wire Line
+	1900 5950 1900 6050
+Wire Wire Line
+	1650 6000 1900 6000
+Connection ~ 1900 6000
+$Comp
+L SMCAP C16
+U 1 1 52746ECA
+P 2200 5950
+F 0 "C16" V 2300 5750 60  0000 C CNN
+F 1 "SMCAP" H 2450 6000 60  0001 C CNN
+F 2 "~" H 2000 6150 60  0000 C CNN
+F 3 "~" H 2000 6150 60  0000 C CNN
+F 4 "1u" V 2200 5750 60  0000 C CNN "Capacitance"
+	1    2200 5950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 52746ED0
+P 2250 6450
+F 0 "#PWR?" H 2250 6450 30  0001 C CNN
+F 1 "GND" H 2250 6380 30  0001 C CNN
+F 2 "" H 2250 6450 60  0000 C CNN
+F 3 "" H 2250 6450 60  0000 C CNN
+	1    2250 6450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 5700 2250 5800
+Connection ~ 2250 5700
+Wire Wire Line
+	2250 5950 2250 6450
+Text Label 2250 5700 0    60   ~ 0
+regulator_3.3V
+$Comp
+L SMCAP C15
+U 1 1 52746EDB
+P 1100 6000
+F 0 "C15" V 1250 6100 60  0000 C CNN
+F 1 "SMCAP" H 1350 6050 60  0001 C CNN
+F 2 "~" H 900 6200 60  0000 C CNN
+F 3 "~" H 900 6200 60  0000 C CNN
+F 4 "1u" V 1100 6100 60  0000 C CNN "Capacitance"
+	1    1100 6000
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1150 6000 1150 6150
+Wire Wire Line
+	1150 6150 1350 6150
+Connection ~ 1350 6150
 $EndSCHEMATC
