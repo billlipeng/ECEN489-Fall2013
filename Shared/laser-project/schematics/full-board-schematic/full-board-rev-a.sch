@@ -1,34 +1,5 @@
 EESchema Schematic File Version 2
 LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:special
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
 LIBS:at90usb1286
 LIBS:ceramic-resonator
 LIBS:mcp1825
@@ -41,7 +12,6 @@ LIBS:ad8302
 LIBS:molex-usb-b
 LIBS:push-switch
 LIBS:bss138
-LIBS:full-board-rev-a-cache
 EELAYER 27 0
 EELAYER END
 $Descr USLetter 11000 8500
@@ -1115,4 +1085,136 @@ Wire Wire Line
 Wire Wire Line
 	1150 6150 1350 6150
 Connection ~ 1350 6150
+$Comp
+L BSS138 T2
+U 1 1 52747BC6
+P 1600 7150
+F 0 "T2" V 1600 6950 60  0000 C CNN
+F 1 "BSS138" V 1900 7050 60  0000 C CNN
+F 2 "~" H 1400 7350 60  0000 C CNN
+F 3 "~" H 1400 7350 60  0000 C CNN
+	1    1600 7150
+	0    1    1    0   
+$EndComp
+$Comp
+L SMRES R13
+U 1 1 52747C02
+P 1700 7250
+F 0 "R13" V 1900 7050 60  0000 C CNN
+F 1 "SMRES" H 2000 7300 60  0001 C CNN
+F 2 "~" H 1450 7550 60  0000 C CNN
+F 3 "~" H 1450 7550 60  0000 C CNN
+F 4 "10k" V 1800 7050 60  0000 C CNN "Resistance"
+	1    1700 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SMRES R12
+U 1 1 52747C11
+P 1200 7250
+F 0 "R12" V 1400 7350 60  0000 C CNN
+F 1 "SMRES" H 1500 7300 60  0001 C CNN
+F 2 "~" H 950 7550 60  0000 C CNN
+F 3 "~" H 950 7550 60  0000 C CNN
+F 4 "10k" V 1300 7350 60  0000 C CNN "Resistance"
+	1    1200 7250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	700  7300 1400 7300
+Wire Wire Line
+	1250 7250 1250 7300
+Connection ~ 1250 7300
+Wire Wire Line
+	1600 7300 2400 7300
+Wire Wire Line
+	1750 7250 1750 7300
+Connection ~ 1750 7300
+Wire Wire Line
+	1750 7000 1750 6750
+Wire Wire Line
+	1750 6750 2100 6750
+Wire Wire Line
+	1250 7000 1250 6750
+Wire Wire Line
+	1250 6750 850  6750
+Wire Wire Line
+	1250 6900 1500 6900
+Wire Wire Line
+	1500 6900 1500 7150
+Connection ~ 1250 6900
+Text Label 850  6750 0    60   ~ 0
+regulator_3.3V
+Text Label 1850 6750 0    60   ~ 0
+regulator_5V
+Text Label 1950 7300 0    60   ~ 0
+twi_scl_5V
+Text Label 700  7300 0    60   ~ 0
+twi_scl_3.3V
+$Comp
+L BSS138 T3
+U 1 1 52748162
+P 3500 7150
+F 0 "T3" V 3500 6950 60  0000 C CNN
+F 1 "BSS138" V 3800 7050 60  0000 C CNN
+F 2 "~" H 3300 7350 60  0000 C CNN
+F 3 "~" H 3300 7350 60  0000 C CNN
+	1    3500 7150
+	0    1    1    0   
+$EndComp
+$Comp
+L SMRES R15
+U 1 1 52748169
+P 3600 7250
+F 0 "R15" V 3800 7050 60  0000 C CNN
+F 1 "SMRES" H 3900 7300 60  0001 C CNN
+F 2 "~" H 3350 7550 60  0000 C CNN
+F 3 "~" H 3350 7550 60  0000 C CNN
+F 4 "10k" V 3700 7050 60  0000 C CNN "Resistance"
+	1    3600 7250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SMRES R14
+U 1 1 52748170
+P 3100 7250
+F 0 "R14" V 3300 7350 60  0000 C CNN
+F 1 "SMRES" H 3400 7300 60  0001 C CNN
+F 2 "~" H 2850 7550 60  0000 C CNN
+F 3 "~" H 2850 7550 60  0000 C CNN
+F 4 "10k" V 3200 7350 60  0000 C CNN "Resistance"
+	1    3100 7250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2600 7300 3300 7300
+Wire Wire Line
+	3150 7250 3150 7300
+Connection ~ 3150 7300
+Wire Wire Line
+	3500 7300 4300 7300
+Wire Wire Line
+	3650 7250 3650 7300
+Connection ~ 3650 7300
+Wire Wire Line
+	3650 7000 3650 6750
+Wire Wire Line
+	3650 6750 4000 6750
+Wire Wire Line
+	3150 7000 3150 6750
+Wire Wire Line
+	3150 6750 2750 6750
+Wire Wire Line
+	3150 6900 3400 6900
+Wire Wire Line
+	3400 6900 3400 7150
+Connection ~ 3150 6900
+Text Label 2750 6750 0    60   ~ 0
+regulator_3.3V
+Text Label 3750 6750 0    60   ~ 0
+regulator_5V
+Text Label 3850 7300 0    60   ~ 0
+twi_sda_5V
+Text Label 2600 7300 0    60   ~ 0
+twi_sda_5V
 $EndSCHEMATC
