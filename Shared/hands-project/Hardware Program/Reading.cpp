@@ -76,29 +76,25 @@ void Reading::ValidateJson(string input)
 	_validReading = false;
 	_errorMessage = "";
 /*
-	bool dontContinue = true;
-	while(dontContinue)
-	{
-		if(input[0] != 'R')
-			input.erase(0,1);
-		else
-			dontContinue = false;
-	}
-*/
-
 	TestString("#YPR=",input);
 		_ya = GetNextDouble(input);
 		TestString(",",input);
 		_pitch = GetNextDouble(input);
 		TestString(",",input);
 		_roll = GetNextDouble(input);
-
-	TestString("\r\n#A-C=",input);
+*/
+	TestString("#A-C=",input);
 		_accelerationXAxis = GetNextDouble(input);
 		TestString(",",input);
 		_accelerationYAxis = GetNextDouble(input);
 		TestString(",",input);
 		_accelerationZAxis = GetNextDouble(input);
+	TestString("\r\n#G-C=",input);
+		_gyroXAxis = GetNextDouble(input);
+		TestString(",",input);
+		_gyroYAxis = GetNextDouble(input);
+		TestString(",",input);
+		_gyroZAxis = GetNextDouble(input);
 
 	_validReading = _errorMessage == "";
 }
@@ -141,6 +137,21 @@ double Reading::GetAccelerationYAxis()
 double Reading::GetAccelerationZAxis()
 {
 	return _accelerationZAxis;
+}
+
+double Reading::GetGyroXAxis()
+{
+	return _gyroXAxis;
+}
+
+double Reading::GetGyroYAxis()
+{
+	return _gyroYAxis;
+}
+
+double Reading::GetGyroZAxis()
+{
+	return _gyroZAxis;
 }
 
 double Reading::GetYa()
