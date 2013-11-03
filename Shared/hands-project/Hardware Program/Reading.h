@@ -17,6 +17,9 @@ public:
 	double GetAccelerationXAxis();
 	double GetAccelerationYAxis();
 	double GetAccelerationZAxis();
+	double GetGyroXAxis();
+	double GetGyroYAxis();
+	double GetGyroZAxis();
 	double GetYa();
 	double GetPitch();
 	double GetRoll();
@@ -34,6 +37,9 @@ private:
 	double _accelerationXAxis;
 	double _accelerationYAxis;
 	double _accelerationZAxis;
+	double _gyroXAxis;
+	double _gyroYAxis;
+	double _gyroZAxis;
 	double _ya;
 	double _pitch;
 	double _roll;
