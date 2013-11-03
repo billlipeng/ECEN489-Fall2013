@@ -12,6 +12,7 @@
 #include <sstream>
 #include <libpq-fe.h>
 #include <conio.h>
+#include <fstream>
 
 using namespace std;
 
@@ -47,15 +48,17 @@ void *ArduinoConnection(void *threadArgument)
 	if (SP->IsConnected())
 		cout << "Connection established with Arduino on Com Port "<<comPortNumber<<endl;
 
-	//char dataToWrite[5] = {'#','o','s','c','t'};
-	//SP->WriteData(dataToWrite, 5);
-
 	const int dataLength = 256;
 	int readResult = 0;
 
-	//char dataToWrite[1] = {'2'};
-	//SP->WriteData(dataToWrite, 1);
+	ofstream file;
+	file.open("IMUdata.txt");
+	file<<"";
+	file.close();
 
+	file.open("IMUdata.txt", ios::app);
+
+/*
 	PGconn *conn = PQconnectdb("host=fulla.ece.tamu.edu dbname=hand user=hand_user password=hand_password");
 	if(PQstatus(conn) != CONNECTION_OK)
 	{
@@ -63,7 +66,7 @@ void *ArduinoConnection(void *threadArgument)
 		PQfinish(conn);
 		return nullptr;
 	}
-
+*/
 	while(SP->IsConnected())
 	{
 		system("cls");
@@ -83,18 +86,22 @@ void *ArduinoConnection(void *threadArgument)
 				{
 					canPrint = false;
 					Reading reading = Reading(incomingData);
-					cout<<"XAxis = "<<reading.GetAccelerationXAxis()<<"       "<<reading.GetErrorMessage()<<endl;
-					cout<<"YAxis = "<<reading.GetAccelerationYAxis()<<"       "<<reading.GetErrorMessage()<<endl;
-					cout<<"ZAxis = "<<reading.GetAccelerationZAxis()<<"       "<<reading.GetErrorMessage()<<endl;
-					cout<<"Ya = "<<reading.GetYa()<<"       "<<reading.GetErrorMessage()<<endl;
-					cout<<"Pitch = "<<reading.GetPitch()<<"       "<<reading.GetErrorMessage()<<endl;
-					cout<<"Roll = "<<reading.GetRoll()<<"       "<<reading.GetErrorMessage()<<endl;
-					cout <<"ComPort = "<<comPortNumber<<endl<<endl;
+					cout<<"XAccel = "<<reading.GetAccelerationXAxis()<<endl;
+					cout<<"YAccel = "<<reading.GetAccelerationYAxis()<<endl;
+					cout<<"ZAccel = "<<reading.GetAccelerationZAxis()<<endl;
+					cout<<"XGyro = "<<reading.GetGyroXAxis()<<endl;
+					cout<<"YGyro = "<<reading.GetGyroYAxis()<<endl;
+					cout<<"ZGyro = "<<reading.GetGyroZAxis()<<endl;
+					cout <<"ComPort = "<<comPortNumber<<endl;
+					cout<<reading.GetErrorMessage()<<endl;
 					canPrint = true;
 					working = false;
 
 					if(reading.GetErrorMessage() == "")
 					{
+
+						file<<cout<<"XAccel = "<<reading.GetAccelerationXAxis()<<'\t'<<"YAccel = "<<reading.GetAccelerationYAxis()<<'\t'<<"ZAccel = "<<reading.GetAccelerationZAxis()<<'\t'<<"XGyro = "<<reading.GetGyroXAxis()<<'\t'<<"YGyro = "<<reading.GetGyroYAxis()<<'\t'<<"ZGyro = "<<reading.GetGyroZAxis()<<endl;
+						/*
 						// Write the data into the database.
 
 						stringstream stringStream;
@@ -142,6 +149,7 @@ void *ArduinoConnection(void *threadArgument)
 						}
 
 						PQclear(op_result);
+						*/
 
 					}
 				}
@@ -157,7 +165,7 @@ void *ArduinoConnection(void *threadArgument)
 		Sleep(35);
 	}
 
-	 PQfinish(conn);
+	 //PQfinish(conn);
 
 	return NULL;
 }
