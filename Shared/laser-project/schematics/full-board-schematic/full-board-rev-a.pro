@@ -1,11 +1,6 @@
-update=11/3/2013 9:13:20 PM
+update=11/4/2013 11:23:07 AM
 version=1
 last_client=eeschema
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
 [general]
 version=1
 [pcbnew]
@@ -28,7 +23,6 @@ DrawSegmentWidth=0.200000000000
 BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
 [pcbnew/libraries]
-LibDir=
 LibName1=sockets
 LibName2=connect
 LibName3=discret
@@ -46,6 +40,13 @@ LibName14=dip_sockets
 LibName15=pga_sockets
 LibName16=valves
 LibName17=Teensy
+LibName18=MCP1825
+LibDir=
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
 [eeschema]
 version=1
 LibDir=../lib
