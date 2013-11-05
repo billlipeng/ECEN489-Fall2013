@@ -23,9 +23,8 @@ int main()
 	//reader.TurnPrintOn();
 	while(true)
 	{
-		system("cls");
+		system("cls"); //clears the console window
 		Reading reading = reader.GetReading();
 		reading.PrintReading();
-		Sleep(5);
 	}
 }
