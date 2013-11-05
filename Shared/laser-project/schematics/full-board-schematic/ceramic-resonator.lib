@@ -1,4 +1,4 @@
-EESchema-LIBRARY Version 2.3  Date: Fri 01 Nov 2013 05:29:46 PM CDT
+EESchema-LIBRARY Version 2.3
 #encoding utf-8
 #
 # ceramic-resonator
@@ -6,14 +6,14 @@ EESchema-LIBRARY Version 2.3  Date: Fri 01 Nov 2013 05:29:46 PM CDT
 DEF ~ceramic-resonator X 0 40 Y Y 1 F N
 F0 "X" 100 50 60 H V C CNN
 F1 "ceramic-resonator" 100 -150 60 H I C CNN
-F2 "~" -100 0 60 H V C CNN
-F3 "~" -100 0 60 H V C CNN
+F2 "" -100 0 60 H V C CNN
+F3 "" -100 0 60 H V C CNN
 DRAW
 S 70 0 130 -100 0 1 0 f
 P 2 0 1 0  50 0  50 -100 N
 P 2 0 1 0  150 0  150 -100 N
-X ~ ~ 0 -50 50 R 50 50 1 1 I
-X ~ ~ 200 -50 50 L 50 50 1 1 I
+X ~ 1 200 -50 50 L 50 50 1 1 I
+X ~ 2 0 -50 50 R 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #

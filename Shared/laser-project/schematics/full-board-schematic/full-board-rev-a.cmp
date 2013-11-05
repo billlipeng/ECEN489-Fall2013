@@ -1,122 +1,122 @@
-Cmp-Mod V01 Created by CvPcb (2012-01-19 BZR 3256)-stable date = 11/5/2013 3:27:10 PM
+Cmp-Mod V01 Created by CvPcb (2013-08-23 BZR 4296)-product date = 11/5/2013 5:24:46 PM
 
 BeginCmp
 TimeStamp = /52740C13;
 Reference = C1;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52740CC0;
 Reference = C2;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52740D9C;
 Reference = C3;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52740DAB;
 Reference = C4;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52741380;
 Reference = C5;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /5274138F;
 Reference = C6;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52741972;
 Reference = C7;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52741979;
 Reference = C8;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /527427A7;
 Reference = C9;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52743059;
 Reference = C10;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52743821;
 Reference = C11;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52743812;
 Reference = C12;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /5274318A;
 Reference = C13;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52746D59;
 Reference = C14;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52746EDB;
 Reference = C15;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52746ECA;
 Reference = C16;
 ValeurCmp = SMCAP;
-IdModule  = SM1210;
+IdModule  = SM0603_Capa;
 EndCmp
 
 BeginCmp
 TimeStamp = /52742E6C;
 Reference = CON1;
 ValeurCmp = USB-B;
-IdModule  = ;
+IdModule  = USB_MINI_B;
 EndCmp
 
 BeginCmp
@@ -130,105 +130,105 @@ BeginCmp
 TimeStamp = /527404D4;
 Reference = R1;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52740B3E;
 Reference = R2;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /5274196B;
 Reference = R3;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52740E3B;
 Reference = R4;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52741D8C;
 Reference = R5;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52742E11;
 Reference = R6;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52742E20;
 Reference = R7;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52743371;
 Reference = R8;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52743380;
 Reference = R9;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52746EB2;
 Reference = R10;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52746EB9;
 Reference = R11;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52747C11;
 Reference = R12;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52747C02;
 Reference = R13;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52748170;
 Reference = R14;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
 TimeStamp = /52748169;
 Reference = R15;
 ValeurCmp = SMRES;
-IdModule  = SM1210;
+IdModule  = SM0603_Resistor;
 EndCmp
 
 BeginCmp
@@ -305,7 +305,7 @@ BeginCmp
 TimeStamp = /526DDAF8;
 Reference = X1;
 ValeurCmp = CERAMIC-RESONATOR;
-IdModule  = ;
+IdModule  = HC-49V;
 EndCmp
 
 EndListe
