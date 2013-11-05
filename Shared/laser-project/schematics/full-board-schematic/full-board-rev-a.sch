@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date 11/4/2013 11:24:24 AM
+EESchema Schematic File Version 2  date 11/4/2013 7:34:03 PM
 LIBS:power
 LIBS:at90usb1286
 LIBS:ceramic-resonator
@@ -51,13 +51,15 @@ LIBS:ttl_ieee
 LIBS:valves
 LIBS:video
 LIBS:xilinx
+LIBS:TEENSYPP2
+LIBS:IMU
 EELAYER 24 0
 EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Laser Mapping Project"
-Date "4 nov 2013"
+Date "5 nov 2013"
 Rev "A"
 Comp "Laser Team"
 Comment1 ""
@@ -1226,7 +1228,7 @@ F 4 "10k" V 3200 7350 60  0000 C CNN "Resistance"
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	2600 7300 3300 7300
+	2550 7300 3300 7300
 Wire Wire Line
 	3150 7250 3150 7300
 Connection ~ 3150 7300
@@ -1254,8 +1256,8 @@ Text Label 3750 6750 0    60   ~ 0
 regulator_5V
 Text Label 3850 7300 0    60   ~ 0
 twi_sda_5V
-Text Label 2600 7300 0    60   ~ 0
-twi_sda_5V
+Text Label 2550 7300 0    60   ~ 0
+twi_sda_3.3V
 Wire Wire Line
 	3300 900  3200 900 
 Text Label 3200 900  2    60   ~ 0
@@ -1420,4 +1422,38 @@ Wire Wire Line
 	5950 6000 5800 6000
 Wire Wire Line
 	5950 6100 5800 6100
+$Comp
+L 6DOF U6
+U 1 1 527841C1
+P 7550 5500
+F 0 "U6" H 7550 5450 60  0000 C CNN
+F 1 "6DOF" H 7600 4700 60  0000 C CNN
+F 2 "" H 7650 5450 60  0000 C CNN
+F 3 "" H 7650 5450 60  0000 C CNN
+	1    7550 5500
+	1    0    0    -1  
+$EndComp
+Text Label 8050 5950 0    60   ~ 0
+twi_sda_3.3V
+Text Label 8050 5850 0    60   ~ 0
+twi_scl_3.3V
+$Comp
+L GND #PWR022
+U 1 1 527841F1
+P 8950 6250
+F 0 "#PWR022" H 8950 6250 30  0001 C CNN
+F 1 "GND" H 8950 6180 30  0001 C CNN
+F 2 "" H 8950 6250 60  0000 C CNN
+F 3 "" H 8950 6250 60  0000 C CNN
+	1    8950 6250
+	1    0    0    -1  
+$EndComp
+Text Label 8050 6150 0    60   ~ 0
+regulator_3.3V
+Wire Wire Line
+	8050 6050 8950 6050
+Wire Wire Line
+	8950 6050 8950 6250
+NoConn ~ 8050 5650
+NoConn ~ 8050 5750
 $EndSCHEMATC
