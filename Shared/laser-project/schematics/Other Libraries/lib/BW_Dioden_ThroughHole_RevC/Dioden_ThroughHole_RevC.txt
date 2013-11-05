@@ -1,0 +1,35 @@
+# About
+Dioden_ThroughHole_RevC.mod
+
+
+Contains the KiCAD module/footprint of some
+through hole diodes.
+
+Diode_DO-35_SOD27_Horizontal_RM10
+Diode_DO-41_SOD81_Horizontal_RM10
+Diode_DO-41_SOD81_Vertical_AnodeUp
+Diode_DO-41_SOD81_Vertical_KathodeUp
+Diode_DO-201AD_Horizontal_RM15
+Diode_LED_3mm_round_vertical
+Diode_LED_5mm_round_vertical
+Diode_P600_Horizontal
+Diode_P600_Vertical_AnodeUp
+Diode_TO-220_Horizontal
+Diode_TO-220_Dual_CommonCathode_Horizontal
+Diode_TO-220_Dual_CommonCathode_Horizontal_LargePads
+Diode_TO-220_Dual_CommonCathode_Vertical
+Diode_TO-220_Horizontal_LargePads
+Diode_TO-220_Vertical
+Diode_TO-247_Dual_CommonCathode_Horizontal
+Diode_TO-247_Dual_CommonCathode_Horizontal_LargePads
+Diode_TO-247_DiodeDual_CommonCathode_Vertical
+Diode_TO-247_Dual_CommonCathode_Vertical
+Diode_TO-247_Horizontal
+Diode_TO-247_Horizontal_largePads
+Diode_TO-247_Horizontal_MountFromLS
+Diode_P600_Vertical_KathodeUp
+Diode_TO-247_Vertical
+
+Author: Bernd Wiebus / Uedem / Germany / xx month 201x
+GNU-GPL, NO WARRANTY!
+
