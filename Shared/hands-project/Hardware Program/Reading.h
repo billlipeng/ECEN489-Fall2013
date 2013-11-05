@@ -2,6 +2,7 @@
 #include <time.h>
 #include <string>
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -10,6 +11,7 @@ using namespace std;
 class Reading
 {
 public:
+	Reading();
 	Reading(string jsonInput);
 	~Reading(void);
 
@@ -24,8 +26,8 @@ public:
 	double GetPitch();
 	double GetRoll();
 	int GetArduinoId();
-	time_t GetTime();
 	string GetErrorMessage();
+	void PrintReading();
 
 private:
 	void ValidateJson(string jsonInput);
@@ -43,7 +45,6 @@ private:
 	double _ya;
 	double _pitch;
 	double _roll;
-	time_t _time; 
 	int _arduinoId;
 	string _errorMessage;
 };

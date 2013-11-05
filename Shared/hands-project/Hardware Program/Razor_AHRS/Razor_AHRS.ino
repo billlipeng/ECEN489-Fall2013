@@ -645,7 +645,7 @@ void loop()
       Drift_correction();
       Euler_angles();
       
-      if (output_stream_on || output_single_on) {output_angles();output_sensors();}
+      if (output_stream_on || output_single_on) {/*output_angles();*/output_sensors();}
     }
     else  // Output sensor values
     {      

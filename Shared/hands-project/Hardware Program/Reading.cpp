@@ -1,20 +1,10 @@
 #include "Reading.h"
 
+Reading::Reading(){}
 
 Reading::Reading(string jsonInput)
 {
 	ValidateJson(jsonInput);
-	if(_validReading)
-	{
-		_time = time(NULL);
-		_arduinoId = 1;
-	}
-	else 
-	{
-		_time = NULL;
-		_arduinoId = -1;
-		//_temperature = -1;
-	}
 }
 
 void Reading::TestString(string testString, string& s)
@@ -99,6 +89,17 @@ void Reading::ValidateJson(string input)
 	_validReading = _errorMessage == "";
 }
 
+void Reading::PrintReading()
+{
+	cout<<"XAccel = "<<GetAccelerationXAxis()<<endl;
+	cout<<"YAccel = "<<GetAccelerationYAxis()<<endl;
+	cout<<"ZAccel = "<<GetAccelerationZAxis()<<endl;
+	cout<<"XGyro = "<<GetGyroXAxis()<<endl;
+	cout<<"YGyro = "<<GetGyroYAxis()<<endl;
+	cout<<"ZGyro = "<<GetGyroZAxis()<<endl;
+	cout<<GetErrorMessage()<<endl;
+}
+
 
 Reading::~Reading(void)
 {
@@ -112,11 +113,6 @@ bool Reading::IsValidReading()
 int Reading::GetArduinoId()
 {
 	return _arduinoId;
-}
-
-time_t Reading::GetTime()
-{
-	return _time;
 }
 
 string Reading::GetErrorMessage()
