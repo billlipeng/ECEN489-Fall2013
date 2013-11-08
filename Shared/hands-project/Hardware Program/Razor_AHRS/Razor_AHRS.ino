@@ -215,21 +215,21 @@ boolean output_errors = false;  // true or false
 // Put MIN/MAX and OFFSET readings for your board here!
 // Accelerometer
 // "accel x,y,z (min/max) = X_MIN/X_MAX Y_MIN/Y_MAX Z_MIN/Z_MAX"
-#define ACCEL_X_MIN ((float) -310)
-#define ACCEL_X_MAX ((float) 276)
-#define ACCEL_Y_MIN ((float) -303)
-#define ACCEL_Y_MAX ((float) 318)
-#define ACCEL_Z_MIN ((float) -317)
-#define ACCEL_Z_MAX ((float) 221)
+#define ACCEL_X_MIN ((float) -265)
+#define ACCEL_X_MAX ((float) 266)
+#define ACCEL_Y_MIN ((float) -255)
+#define ACCEL_Y_MAX ((float) 271)
+#define ACCEL_Z_MIN ((float) -275)
+#define ACCEL_Z_MAX ((float) 244)
  
 // Magnetometer (standard calibration mode)
 // "magn x,y,z (min/max) = X_MIN/X_MAX Y_MIN/Y_MAX Z_MIN/Z_MAX"
-#define MAGN_X_MIN ((float) -479)
-#define MAGN_X_MAX ((float) 559)
-#define MAGN_Y_MIN ((float) -421)
-#define MAGN_Y_MAX ((float) 578)
-#define MAGN_Z_MIN ((float) -509)
-#define MAGN_Z_MAX ((float) 418)
+#define MAGN_X_MIN ((float) -364)
+#define MAGN_X_MAX ((float) 646)
+#define MAGN_Y_MIN ((float) -582)
+#define MAGN_Y_MAX ((float) 612)
+#define MAGN_Z_MIN ((float) -571)
+#define MAGN_Z_MAX ((float) 482)
  
 // Magnetometer (extended calibration mode)
 // Uncommend to use extended magnetometer calibration (compensates hard & soft iron errors)
@@ -239,9 +239,9 @@ boolean output_errors = false;  // true or false
  
 // Gyroscope
 // "gyro x,y,z (current/average) = .../OFFSET_X .../OFFSET_Y .../OFFSET_Z
-#define GYRO_AVERAGE_OFFSET_X ((float) -15.18)
-#define GYRO_AVERAGE_OFFSET_Y ((float) -55.27)
-#define GYRO_AVERAGE_OFFSET_Z ((float) 0.23)
+#define GYRO_AVERAGE_OFFSET_X ((float) -2.3)
+#define GYRO_AVERAGE_OFFSET_Y ((float) -5.0)
+#define GYRO_AVERAGE_OFFSET_Z ((float) 12.6)
  
 /*
 // Calibration example:
@@ -507,6 +507,7 @@ void setup()
   
   // Read sensors, init DCM algorithm
   //delay(20);  // Give sensors enough time to collect data
+  delay(20);
   reset_sensor_fusion();
 
   // Init output
@@ -645,7 +646,7 @@ void loop()
       Drift_correction();
       Euler_angles();
       
-      if (output_stream_on || output_single_on) {/*output_angles();*/output_sensors();}
+      if (output_stream_on || output_single_on) {/*output_angles();*/output_sensors();/*output_angles();*/}
     }
     else  // Output sensor values
     {      

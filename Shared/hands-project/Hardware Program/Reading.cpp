@@ -1,4 +1,5 @@
 #include "Reading.h"
+#include <fstream>
 
 Reading::Reading(){}
 

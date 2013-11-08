@@ -108,6 +108,7 @@ void output_sensors()
       output_sensors_text('R');
   }
   else if (output_mode == OUTPUT__MODE_SENSORS_CALIB | output_mode == OUTPUT__MODE_ANGLES)
+  //else if (output_mode == OUTPUT__MODE_SENSORS_CALIB)
   {
     // Apply sensor calibration
     compensate_sensor_errors();
