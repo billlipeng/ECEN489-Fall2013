@@ -1,15 +1,14 @@
-PCBNEW-LibModule-V1  11/8/2013 3:12:46 PM
+PCBNEW-LibModule-V1  11/8/2013 3:12:37 PM
 # encoding utf-8
 Units mm
 $INDEX
 SW
 boardmount
-mount
 $EndINDEX
 $MODULE SW
-Po 0 0 0 15 527AE728 527AE6F6 ~~
+Po 0 0 0 15 527AE728 00000000 ~~
 Li SW
-Sc 527AE6F6
+Sc 0
 AR 
 Op 0 0 0
 T0 0 2.60096 1.27 1.27 0 0.254 N V 21 N "SW"
@@ -59,20 +58,4 @@ Ne 0 ""
 Po 0 0
 $EndPAD
 $EndMODULE boardmount
-$MODULE mount
-Po 0 0 0 15 527D53B8 00000000 ~~
-Li mount
-Sc 0
-AR 
-Op 0 0 0
-T0 0 -3.81 1 1 0 0.15 N V 21 N "Mount"
-T1 0 3.81 1 1 0 0.15 N V 21 N "VAL**"
-$PAD
-Sh "1" C 4 4 0 0 0
-Dr 3.8 0 0
-At STD N 00E0FFFF
-Ne 0 ""
-Po 0 0
-$EndPAD
-$EndMODULE mount
 $EndLIBRARY
