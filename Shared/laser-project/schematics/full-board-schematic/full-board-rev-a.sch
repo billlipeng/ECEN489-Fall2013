@@ -432,11 +432,11 @@ Text Label 8550 1100 0    60   ~ 0
 osc_ctrl1
 Text Label 8550 1200 0    60   ~ 0
 osc_ctrl0
-Text Label 1400 800  0    60   ~ 0
+Text Label 1200 800  0    60   ~ 0
 usb_5V
-Text Label 1400 900  0    60   ~ 0
+Text Label 1200 900  0    60   ~ 0
 usb_d-
-Text Label 1400 1000 0    60   ~ 0
+Text Label 1200 1000 0    60   ~ 0
 usb_d+
 $Comp
 L GND #PWR012
@@ -535,7 +535,7 @@ F 3 "" H 2250 4800 60  0001 C CNN
 	1    2250 4800
 	1    0    0    -1  
 $EndComp
-Text Label 2250 3850 0    60   ~ 0
+Text Label 2250 4050 0    60   ~ 0
 regulator_5V
 $Comp
 L SMRES R8
@@ -744,7 +744,7 @@ F 4 "10k" V 1300 7350 60  0000 C CNN "Resistance"
 $EndComp
 Text Label 850  6750 0    60   ~ 0
 regulator_3.3V
-Text Label 1750 6650 0    60   ~ 0
+Text Label 1750 6750 0    60   ~ 0
 regulator_5V
 Text Label 1950 7300 0    60   ~ 0
 twi_scl_5V
@@ -787,7 +787,7 @@ F 4 "10k" V 3200 7350 60  0000 C CNN "Resistance"
 $EndComp
 Text Label 2750 6750 0    60   ~ 0
 regulator_3.3V
-Text Label 3750 6650 0    60   ~ 0
+Text Label 3650 6750 0    60   ~ 0
 regulator_5V
 Text Label 3850 7300 0    60   ~ 0
 twi_sda_5V
@@ -941,12 +941,6 @@ Wire Wire Line
 Wire Wire Line
 	8700 5400 9550 5400
 Wire Wire Line
-	1200 800  1700 800 
-Wire Wire Line
-	1200 900  1700 900 
-Wire Wire Line
-	1200 1000 1700 1000
-Wire Wire Line
 	1200 1200 1300 1200
 Wire Wire Line
 	1300 1200 1300 1400
@@ -1051,8 +1045,6 @@ Connection ~ 1750 7300
 Wire Wire Line
 	1750 7000 1750 6750
 Wire Wire Line
-	1750 6750 2100 6750
-Wire Wire Line
 	1250 7000 1250 6750
 Wire Wire Line
 	1250 6750 850  6750
@@ -1073,8 +1065,6 @@ Wire Wire Line
 Connection ~ 3650 7300
 Wire Wire Line
 	3650 7000 3650 6750
-Wire Wire Line
-	3650 6750 4000 6750
 Wire Wire Line
 	3150 7000 3150 6750
 Wire Wire Line
