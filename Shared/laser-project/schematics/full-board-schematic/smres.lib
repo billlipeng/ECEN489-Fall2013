@@ -1,4 +1,4 @@
-EESchema-LIBRARY Version 2.3  Date: Fri 01 Nov 2013 02:48:47 PM CDT
+EESchema-LIBRARY Version 2.3  Date: Fri 08 Nov 2013 05:58:25 PM CST
 #encoding utf-8
 #
 # SMRES
@@ -10,8 +10,8 @@ F2 "~" -250 300 60 H V C CNN
 F3 "~" -250 300 60 H V C CNN
 DRAW
 S 50 -75 200 -25 0 1 0 N
-X ~ 1 0 -50 50 R 50 50 1 1 I
-X ~ 2 250 -50 50 L 50 50 1 1 I
+X ~ 1 0 -50 50 R 50 50 1 1 P
+X ~ 2 250 -50 50 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
