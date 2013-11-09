@@ -1,56 +1,8 @@
-update=Fri 08 Nov 2013 07:00:48 PM CST
+update=Fri 08 Nov 2013 09:15:32 PM CST
 version=1
-last_client=eeschema
+last_client=pcbnew
 [general]
 version=1
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
-[pcbnew]
-version=1
-LastNetListRead=full-board-rev-a.net
-UseCmpFile=1
-PadDrill=3.800000000000
-PadDrillOvalY=3.800000000000
-PadSizeH=4.000000000000
-PadSizeV=4.000000000000
-PcbTextSizeV=1.500000000000
-PcbTextSizeH=1.500000000000
-PcbTextThickness=0.300000000000
-ModuleTextSizeV=1.000000000000
-ModuleTextSizeH=1.000000000000
-ModuleTextSizeThickness=0.150000000000
-SolderMaskClearance=0.000000000000
-SolderMaskMinWidth=0.000000000000
-DrawSegmentWidth=0.200000000000
-BoardOutlineThickness=0.100000000000
-ModuleOutlineThickness=0.150000000000
-[pcbnew/libraries]
-LibDir=
-LibName1=sockets
-LibName2=connect
-LibName3=discret
-LibName4=pin_array
-LibName5=divers
-LibName6=smd_capacitors
-LibName7=smd_resistors
-LibName8=smd_crystal&oscillator
-LibName9=smd_dil
-LibName10=smd_transistors
-LibName11=libcms
-LibName12=display
-LibName13=led
-LibName14=dip_sockets
-LibName15=pga_sockets
-LibName16=valves
-LibName17=Teensy
-LibName18=MCP1825
-LibName19=XTAL16
-LibName20=16MHzRES
-LibName21=SW
-LibName22=boardmount
 [eeschema]
 version=1
 LibDir=../lib
@@ -76,3 +28,51 @@ LibName13=bss138
 LibName14=TEENSYPP2
 LibName15=IMU
 LibName16=murataosc
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
+[pcbnew]
+version=1
+LastNetListRead=full-board-rev-a.net
+UseCmpFile=1
+PadDrill="    3.800000"
+PadDrillOvalY="    3.800000"
+PadSizeH="    4.000000"
+PadSizeV="    4.000000"
+PcbTextSizeV="    1.500000"
+PcbTextSizeH="    1.500000"
+PcbTextThickness="    0.300000"
+ModuleTextSizeV="    1.000000"
+ModuleTextSizeH="    1.000000"
+ModuleTextSizeThickness="    0.150000"
+SolderMaskClearance="    0.000000"
+SolderMaskMinWidth="    0.000000"
+DrawSegmentWidth="    0.200000"
+BoardOutlineThickness="    0.100000"
+ModuleOutlineThickness="    0.150000"
+[pcbnew/libraries]
+LibDir=
+LibName1=sockets
+LibName2=discret
+LibName3=pin_array
+LibName4=divers
+LibName5=smd_capacitors
+LibName6=smd_resistors
+LibName7=smd_crystal&oscillator
+LibName8=smd_dil
+LibName9=smd_transistors
+LibName10=libcms
+LibName11=display
+LibName12=led
+LibName13=dip_sockets
+LibName14=pga_sockets
+LibName15=valves
+LibName16=Teensy
+LibName17=MCP1825
+LibName18=XTAL16
+LibName19=16MHzRES
+LibName20=SW
+LibName21=boardmount
+LibName22=usb-mini-b
