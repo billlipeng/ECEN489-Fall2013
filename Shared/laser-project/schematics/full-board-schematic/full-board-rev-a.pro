@@ -1,6 +1,6 @@
-update=Sat 09 Nov 2013 07:58:00 PM CST
+update=Sun 10 Nov 2013 11:34:24 PM CST
 version=1
-last_client=pcbnew
+last_client=cvpcb
 [general]
 version=1
 [eeschema]
@@ -29,19 +29,15 @@ LibName14=TEENSYPP2
 LibName15=IMU
 LibName16=murataosc
 LibName17=jtag-10mil-header
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
+LibName18=encoder-10mil-header
 [pcbnew]
 version=1
 LastNetListRead=full-board-rev-a.net
 UseCmpFile=1
-PadDrill="    3.800000"
-PadDrillOvalY="    3.800000"
-PadSizeH="    4.000000"
-PadSizeV="    4.000000"
+PadDrill="    1.016000"
+PadDrillOvalY="    1.016000"
+PadSizeH="    1.524000"
+PadSizeV="    1.524000"
 PcbTextSizeV="    1.500000"
 PcbTextSizeH="    1.500000"
 PcbTextThickness="    0.300000"
@@ -54,7 +50,6 @@ DrawSegmentWidth="    0.200000"
 BoardOutlineThickness="    0.100000"
 ModuleOutlineThickness="    0.150000"
 [pcbnew/libraries]
-LibDir=
 LibName1=sockets
 LibName2=discret
 LibName3=pin_array
@@ -72,9 +67,15 @@ LibName14=pga_sockets
 LibName15=valves
 LibName16=Teensy
 LibName17=MCP1825
-LibName18=XTAL16
-LibName19=16MHzRES
-LibName20=SW
-LibName21=boardmount
-LibName22=usb-mini-b
-LibName23=jtag-10mil-header
+LibName18=16MHzRES
+LibName19=SW
+LibName20=boardmount
+LibName21=usb-mini-b
+LibName22=jtag-10mil-header
+LibName23=encoder-10mil-header
+LibDir=
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms

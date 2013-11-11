@@ -1,0 +1,78 @@
+PCBNEW-LibModule-V1  Sun 10 Nov 2013 11:33:23 PM CST
+# encoding utf-8
+Units mm
+$INDEX
+encoder-10mil-header
+$EndINDEX
+$MODULE encoder-10mil-header
+Po 0 0 0 15 52806C18 00000000 ~~
+Li encoder-10mil-header
+Cd Double rangee de contacts 2 x 5 pins
+Kw CONN
+Sc 0
+AR 
+Op 0 0 0
+T0 3.556 -2.54 1.016 1.016 0 0.2032 N V 21 N "encoder-10mil-header"
+T1 -3.556 -4.064 1.016 1.016 0 0.2032 N I 21 N "Val**"
+T2 11.938 2.286 1 1 0 0.15 N V 21 N "GND"
+T2 9.144 2.286 1 1 0 0.15 N V 21 N "D3"
+T2 6.604 2.286 1 1 0 0.15 N V 21 N "D2"
+DS -5.08 -1.27 -5.08 1.27 0.15 21
+DS -5.08 1.27 12.7 1.27 0.15 21
+DS 12.7 1.27 12.7 -1.27 0.15 21
+DS 12.7 -1.27 -5.08 -1.27 0.15 21
+T2 4.064 2.286 1 1 0 0.15 N V 21 N "D1"
+T2 1.524 2.286 1 1 0 0.15 N V 21 N "D0"
+T2 -1.524 2.286 1 1 0 0.15 N V 21 N "3.3V"
+T2 -4.572 2.286 1 1 0 0.15 N V 21 N "5V"
+$PAD
+Sh "1" R 1.524 1.524 0 0 0
+Dr 1.016 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po -3.81 0
+$EndPAD
+$PAD
+Sh "2" C 1.524 1.524 0 0 0
+Dr 1.016 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po -1.27 0
+$EndPAD
+$PAD
+Sh "3" C 1.524 1.524 0 0 0
+Dr 1.016 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 1.27 0
+$EndPAD
+$PAD
+Sh "4" C 1.524 1.524 0 0 0
+Dr 1.016 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 3.81 0
+$EndPAD
+$PAD
+Sh "5" C 1.524 1.524 0 0 0
+Dr 1.016 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 6.35 0
+$EndPAD
+$PAD
+Sh "6" C 1.524 1.524 0 0 0
+Dr 1.016 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 8.89 0
+$EndPAD
+$PAD
+Sh "7" C 1.524 1.524 0 0 0
+Dr 1.016 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 11.43 0
+$EndPAD
+$EndMODULE encoder-10mil-header
+$EndLIBRARY
