@@ -1,4 +1,4 @@
-update=Fri 08 Nov 2013 09:15:32 PM CST
+update=Sat 09 Nov 2013 07:58:00 PM CST
 version=1
 last_client=pcbnew
 [general]
@@ -28,6 +28,7 @@ LibName13=bss138
 LibName14=TEENSYPP2
 LibName15=IMU
 LibName16=murataosc
+LibName17=jtag-10mil-header
 [cvpcb]
 version=1
 NetIExt=net
@@ -76,3 +77,4 @@ LibName19=16MHzRES
 LibName20=SW
 LibName21=boardmount
 LibName22=usb-mini-b
+LibName23=jtag-10mil-header

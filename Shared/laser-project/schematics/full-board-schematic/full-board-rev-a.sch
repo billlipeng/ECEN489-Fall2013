@@ -15,6 +15,7 @@ LIBS:bss138
 LIBS:TEENSYPP2
 LIBS:IMU
 LIBS:murataosc
+LIBS:jtag-10mil-header
 LIBS:full-board-rev-a-cache
 EELAYER 27 0
 EELAYER END
@@ -22,7 +23,7 @@ $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Laser Mapping Project"
-Date "9 nov 2013"
+Date "10 nov 2013"
 Rev "A"
 Comp "Laser Team"
 Comment1 ""
@@ -55,12 +56,12 @@ $EndComp
 $Comp
 L DS1077 U2
 U 1 1 526F0599
-P 8250 1100
-F 0 "U2" H 8000 1400 60  0000 C CNN
-F 1 "DS1077" H 8350 1400 60  0000 C CNN
-F 2 "" H 8250 1100 60  0001 C CNN
-F 3 "" H 8250 1100 60  0001 C CNN
-	1    8250 1100
+P 9600 3000
+F 0 "U2" H 9350 3300 60  0000 C CNN
+F 1 "DS1077" H 9700 3300 60  0000 C CNN
+F 2 "" H 9600 3000 60  0001 C CNN
+F 3 "" H 9600 3000 60  0001 C CNN
+	1    9600 3000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -121,12 +122,12 @@ $EndComp
 $Comp
 L GND #PWR07
 U 1 1 52718D27
-P 7800 1400
-F 0 "#PWR07" H 7800 1400 30  0001 C CNN
-F 1 "GND" H 7800 1330 30  0001 C CNN
-F 2 "" H 7800 1400 60  0001 C CNN
-F 3 "" H 7800 1400 60  0001 C CNN
-	1    7800 1400
+P 9150 3300
+F 0 "#PWR07" H 9150 3300 30  0001 C CNN
+F 1 "GND" H 9150 3230 30  0001 C CNN
+F 2 "" H 9150 3300 60  0001 C CNN
+F 3 "" H 9150 3300 60  0001 C CNN
+	1    9150 3300
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -165,7 +166,7 @@ F 3 "~" H 8050 4350 60  0000 C CNN
 $EndComp
 Text Label 8200 3600 0    60   ~ 0
 mod_sig_1
-Text Label 7800 900  2    60   ~ 0
+Text Label 9150 2800 2    60   ~ 0
 mod_sig_1
 $Comp
 L SMRES R2
@@ -410,27 +411,27 @@ Text Label 5600 900  0    60   ~ 0
 twi_scl_5V
 Text Label 5600 1000 0    60   ~ 0
 twi_sda_5V
-Text Label 8550 900  0    60   ~ 0
+Text Label 9900 2800 0    60   ~ 0
 twi_scl_5V
-Text Label 8550 1000 0    60   ~ 0
+Text Label 9900 2900 0    60   ~ 0
 twi_sda_5V
-Text Label 7650 1100 2    60   ~ 0
+Text Label 9000 3000 2    60   ~ 0
 regulator_5V
 $Comp
 L SMCAP C9
 U 1 1 527427A7
-P 7600 1300
-F 0 "C9" V 7700 1400 60  0000 C CNN
-F 1 "SMCAP" H 7850 1350 60  0001 C CNN
-F 2 "" H 7600 1300 60  0001 C CNN
-F 3 "" H 7600 1300 60  0001 C CNN
-F 4 "0.01u" V 7600 1450 60  0000 C CNN "Capacitance"
-	1    7600 1300
+P 8950 3200
+F 0 "C9" V 9050 3300 60  0000 C CNN
+F 1 "SMCAP" H 9200 3250 60  0001 C CNN
+F 2 "" H 8950 3200 60  0001 C CNN
+F 3 "" H 8950 3200 60  0001 C CNN
+F 4 "0.01u" V 8950 3350 60  0000 C CNN "Capacitance"
+	1    8950 3200
 	0    -1   -1   0   
 $EndComp
-Text Label 8550 1100 0    60   ~ 0
+Text Label 9900 3000 0    60   ~ 0
 osc_ctrl1
-Text Label 8550 1200 0    60   ~ 0
+Text Label 9900 3100 0    60   ~ 0
 osc_ctrl0
 Text Label 1200 800  0    60   ~ 0
 usb_5V
@@ -1112,17 +1113,17 @@ F 3 "~" H 800 950 60  0000 C CNN
 $EndComp
 NoConn ~ 1200 1100
 Wire Wire Line
-	7800 1200 7800 1400
+	9150 3100 9150 3300
 Wire Wire Line
-	7650 1350 7800 1350
-Connection ~ 7800 1350
+	9000 3250 9150 3250
+Connection ~ 9150 3250
 Wire Wire Line
-	7650 1100 7800 1100
-NoConn ~ 7800 1000
+	9000 3000 9150 3000
+NoConn ~ 9150 2900
 Wire Wire Line
-	7650 1350 7650 1300
+	9000 3250 9000 3200
 Wire Wire Line
-	7650 1150 7650 1100
+	9000 3050 9000 3000
 Wire Wire Line
 	3350 1550 3350 1500
 Wire Wire Line
@@ -1169,10 +1170,6 @@ NoConn ~ 5600 5100
 NoConn ~ 5600 5200
 NoConn ~ 5600 5600
 NoConn ~ 5600 5700
-NoConn ~ 5600 5800
-NoConn ~ 5600 5900
-NoConn ~ 5600 6000
-NoConn ~ 5600 6100
 NoConn ~ 3500 2700
 Wire Wire Line
 	1550 4050 2250 4050
@@ -1243,4 +1240,31 @@ Wire Wire Line
 	9200 3900 9200 4150
 Wire Wire Line
 	9200 3700 9200 3600
+Text Label 5600 5800 0    60   ~ 0
+jtag_tck
+Text Label 5600 5900 0    60   ~ 0
+jtag_tms
+Text Label 5600 6000 0    60   ~ 0
+jtag_tdo
+Text Label 5600 6100 0    60   ~ 0
+jtag_tdi
+$Comp
+L JTAG-10MIL-HDR CON2
+U 1 1 527EE66C
+P 9900 1200
+F 0 "CON2" H 9950 700 60  0000 C CNN
+F 1 "JTAG-10MIL-HDR" H 9900 1300 60  0000 C CNN
+F 2 "~" H 9700 1400 60  0000 C CNN
+F 3 "~" H 9700 1400 60  0000 C CNN
+	1    9900 1200
+	-1   0    0    1   
+$EndComp
+Text Label 9650 1150 2    60   ~ 0
+jtag_tck
+Text Label 9650 1050 2    60   ~ 0
+jtag_tms
+Text Label 9650 950  2    60   ~ 0
+jtag_tdi
+Text Label 9650 850  2    60   ~ 0
+jtag_tdo
 $EndSCHEMATC

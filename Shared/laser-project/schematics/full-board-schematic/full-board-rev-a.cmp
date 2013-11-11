@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-may-18)-stable date = Fri 08 Nov 2013 09:13:46 PM CST
+Cmp-Mod V01 Created by CvPcb (2013-may-18)-stable date = Sat 09 Nov 2013 07:59:56 PM CST
 
 BeginCmp
 TimeStamp = /52740C13;
@@ -103,6 +103,13 @@ TimeStamp = /527D4FC0;
 Reference = CON1;
 ValeurCmp = USB-MINI-B;
 IdModule  = usb-mini-b;
+EndCmp
+
+BeginCmp
+TimeStamp = /527EE66C;
+Reference = CON2;
+ValeurCmp = JTAG-10MIL-HDR;
+IdModule  = JTAG-10mil-hdr;
 EndCmp
 
 BeginCmp
