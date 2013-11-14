@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date 11/13/2013 3:26:50 PM
+EESchema Schematic File Version 2  date 11/13/2013 7:10:31 PM
 LIBS:power
 LIBS:at90usb1286
 LIBS:ceramic-resonator
@@ -25,7 +25,7 @@ $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Laser Mapping Project"
-Date "13 nov 2013"
+Date "14 nov 2013"
 Rev "A"
 Comp "Laser Team"
 Comment1 ""
@@ -404,7 +404,7 @@ osc_ctrl1
 Text Label 6250 3050 0    60   ~ 0
 osc_ctrl0
 Text Label 7650 1300 0    60   ~ 0
-usb_5V
+teensy_5V
 $Comp
 L GND #PWR011
 U 1 1 52742975
@@ -500,7 +500,7 @@ F 4 "1u" V 8150 1700 60  0000 C CNN "Capacitance"
 	0    -1   -1   0   
 $EndComp
 Text Label 4950 1300 0    60   ~ 0
-usb_5V
+teensy_5V
 $Comp
 L GND #PWR014
 U 1 1 52746E9E
@@ -1010,7 +1010,7 @@ F 3 "DOCUMENTATION" H 2500 2350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 3850 1400 0    40   ~ 0
-regulator_5V
+teensy_5V
 Text Label 3850 2500 0    40   ~ 0
 ad8302_vref
 Text Label 1950 3800 3    40   ~ 0

@@ -1,4 +1,4 @@
-(kicad_pcb (version 3) (host pcbnew "(2013-04-14 BZR 4098)-testing")
+(kicad_pcb (version 3) (host pcbnew "(2013-04-18 BZR 4102)-testing")
 
   (general
     (links 97)
@@ -32,12 +32,12 @@
   )
 
   (setup
-    (last_trace_width 0.7)
+    (last_trace_width 0.3)
     (user_trace_width 0.3)
     (user_trace_width 0.7)
     (trace_clearance 0.254)
     (zone_clearance 0.508)
-    (zone_45_only no)
+    (zone_45_only yes)
     (trace_min 0.254)
     (segment_width 0.2)
     (edge_width 0.1)
@@ -1767,7 +1767,7 @@
   (segment (start 263.6 115.204) (end 259.954 115.204) (width 0.3) (layer F.Cu) (net 5))
   (segment (start 259.954 115.204) (end 258.064 117.094) (width 0.3) (layer F.Cu) (net 5) (tstamp 5281BD29))
   (segment (start 273.7358 105.156) (end 273.7612 105.156) (width 0.3) (layer B.Cu) (net 6))
-  (segment (start 272.1818 115.854) (end 269.8 115.854) (width 0.3) (layer F.Cu) (net 6) (tstamp 5283E94B) (status 800000))
+  (segment (start 272.1818 115.854) (end 269.8 115.854) (width 0.3) (layer F.Cu) (net 6) (tstamp 5283E94B))
   (segment (start 273.7612 114.2746) (end 272.1818 115.854) (width 0.3) (layer F.Cu) (net 6) (tstamp 5283E94A))
   (via (at 273.7612 114.2746) (size 0.889) (layers F.Cu B.Cu) (net 6))
   (segment (start 274.5486 113.4872) (end 273.7612 114.2746) (width 0.3) (layer B.Cu) (net 6) (tstamp 5283E948))
@@ -1884,8 +1884,8 @@
   (segment (start 200.914 143.51) (end 240.284 143.51) (width 0.7) (layer F.Cu) (net 20) (tstamp 52824253))
   (segment (start 242.062 141.732) (end 242.062 137.922) (width 0.7) (layer F.Cu) (net 20) (tstamp 52824259))
   (segment (start 240.284 143.51) (end 242.062 141.732) (width 0.7) (layer F.Cu) (net 20) (tstamp 52824258))
-  (segment (start 278.13 108.966) (end 278.13 107.0864) (width 0.7) (layer F.Cu) (net 21) (status 400000))
-  (segment (start 246.66956 102.02164) (end 241.0587 107.6325) (width 0.7) (layer F.Cu) (net 21) (tstamp 5283E845) (status 800000))
+  (segment (start 278.13 108.966) (end 278.13 107.0864) (width 0.7) (layer F.Cu) (net 21))
+  (segment (start 246.66956 102.02164) (end 241.0587 107.6325) (width 0.7) (layer F.Cu) (net 21) (tstamp 5283E845))
   (segment (start 273.06524 102.02164) (end 246.66956 102.02164) (width 0.7) (layer F.Cu) (net 21) (tstamp 5283E841))
   (segment (start 278.13 107.0864) (end 273.06524 102.02164) (width 0.7) (layer F.Cu) (net 21) (tstamp 5283E839))
   (segment (start 265.34734 130.99808) (end 267.46442 130.99808) (width 0.3) (layer F.Cu) (net 21))
