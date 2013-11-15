@@ -1,4 +1,4 @@
-update=11/13/2013 3:14:36 PM
+update=Thu 14 Nov 2013 04:48:09 PM CST
 last_client=eeschema
 [cvpcb]
 version=1
@@ -79,3 +79,4 @@ LibName16=murataosc
 LibName17=jtag-10mil-header
 LibName18=encoder-10mil-header
 LibName19=buffer
+LibName20=ti-opa2356

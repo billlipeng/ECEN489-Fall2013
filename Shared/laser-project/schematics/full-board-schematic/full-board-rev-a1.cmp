@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by PcbNew date = 11/13/2013 2:01:01 PM
+Cmp-Mod V01 Created by CvPcb (2013-may-18)-stable date = Thu 14 Nov 2013 04:50:01 PM CST
 
 BeginCmp
 TimeStamp = /52741972;
@@ -264,6 +264,13 @@ TimeStamp = /527841C1;
 Reference = U6;
 ValeurCmp = 6DOF;
 IdModule  = PIN_ARRAY-6X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52855541;
+Reference = U7;
+ValeurCmp = TI-OPA2356;
+IdModule  = MSOP_8;
 EndCmp
 
 EndListe

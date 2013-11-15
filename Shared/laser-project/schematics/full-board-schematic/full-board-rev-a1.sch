@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date 11/13/2013 7:10:31 PM
+EESchema Schematic File Version 2
 LIBS:power
 LIBS:at90usb1286
 LIBS:ceramic-resonator
@@ -18,8 +18,8 @@ LIBS:murataosc
 LIBS:jtag-10mil-header
 LIBS:encoder-10mil-header
 LIBS:buffer
-LIBS:full-board-rev-a1-cache
-EELAYER 24 0
+LIBS:ti-opa2356
+EELAYER 27 0
 EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
@@ -145,7 +145,7 @@ F 3 "~" H 4400 4700 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 Text Label 4550 3950 0    60   ~ 0
-mod_sig_1
+laser_drive_sig
 Text Label 5500 2750 2    60   ~ 0
 mod_sig_1
 $Comp
@@ -1064,4 +1064,45 @@ Text Label 3850 2600 0    40   ~ 0
 ad8302_mag
 Text Label 3850 2700 0    40   ~ 0
 ad8302_phs
+Text Label 6750 5350 0    60   ~ 0
+regulator_5V
+$Comp
+L GND #PWR?
+U 1 1 528552A0
+P 5700 5800
+F 0 "#PWR?" H 5700 5800 30  0001 C CNN
+F 1 "GND" H 5700 5730 30  0001 C CNN
+F 2 "" H 5700 5800 60  0001 C CNN
+F 3 "" H 5700 5800 60  0001 C CNN
+	1    5700 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5700 5800 5700 5650
+Wire Wire Line
+	5700 5650 5800 5650
+Text Label 5800 5550 2    60   ~ 0
+mod_sig_1
+Wire Wire Line
+	5800 5350 5700 5350
+Wire Wire Line
+	5700 5350 5700 5450
+Wire Wire Line
+	5700 5450 5800 5450
+Text Label 5700 5350 2    60   ~ 0
+laser_drive_sig
+$Comp
+L TI-OPA2356 U7
+U 1 1 52855541
+P 5900 5250
+F 0 "U7" H 5950 5400 60  0000 C CNN
+F 1 "TI-OPA2356" H 6200 5300 60  0000 C CNN
+F 2 "~" H 5900 5050 60  0000 C CNN
+F 3 "~" H 5900 5050 60  0000 C CNN
+	1    5900 5250
+	1    0    0    -1  
+$EndComp
+NoConn ~ 6750 5450
+NoConn ~ 6750 5550
+NoConn ~ 6750 5650
 $EndSCHEMATC
