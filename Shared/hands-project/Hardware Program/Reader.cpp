@@ -9,8 +9,9 @@
 
 Reader::Reader() {}
 
-Reader::Reader(int comPortNumber) {
+Reader::Reader(int comPortNumber, SensorType sensorType) {
 
+	_sensorType = sensorType;
 	_comPortNumber = comPortNumber;
 	_print = false;
 	_fileName = "log.txt";
@@ -41,6 +42,7 @@ Reader::Reader(int comPortNumber) {
 
 void* RunThread(void* threadArgument)
 {
+
 	Reader* reader = (Reader*)threadArgument;
 
 	int dataLength = 256;
@@ -58,7 +60,7 @@ void* RunThread(void* threadArgument)
 
 		if (readResult > 0)
 		{
-			reader->SetReading(Reading(incomingData));
+			reader->SetReading(Reading(incomingData, reader->GetSensorType()));
 
 			if(reader->GetReading().GetErrorMessage() == "")
 			{
@@ -78,9 +80,10 @@ void* RunThread(void* threadArgument)
 
 void Reader::SpinThread()
 {
+	cout<<"WWWZZZZ"<<endl;
 	int successful = pthread_create(&_thread, NULL, RunThread, (void*)this);
 
-	if(!successful)
+	if(successful)
 		cout<<"Error Creating Thread For Com Port "<<_comPortNumber<<endl;
 	else
 		cout<<"Successfully Created Thread For Com Port "<<_comPortNumber<<endl;
@@ -119,6 +122,11 @@ void Reader::TurnPrintOff()
 string Reader::GetFileName()
 {
 	return _fileName;
+}
+
+SensorType Reader::GetSensorType()
+{
+	return _sensorType;
 }
 
 void Reader::SetFileName(string name)

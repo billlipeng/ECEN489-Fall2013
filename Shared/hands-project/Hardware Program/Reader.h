@@ -17,7 +17,7 @@
 class Reader {
 public:
 	Reader();
-	Reader(int comPortNumber);
+	Reader(int comPortNumber, SensorType sensorType);
 	Serial* GetSerial();
 	void SetReading(Reading reading);
 	Reading GetReading();
@@ -26,7 +26,7 @@ public:
 	void TurnPrintOff();
 	void SetFileName(string name);
 	string GetFileName();
-
+	SensorType GetSensorType();
 
 private:
 	void SpinThread();
@@ -36,6 +36,7 @@ private:
 	pthread_t _thread;
 	bool _print;
 	string _fileName;
+	SensorType _sensorType;
 };
 
 #endif /* READER_H_ */

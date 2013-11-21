@@ -6,13 +6,16 @@
 
 using namespace std;
 
-//This comment is uneeded
-//This is the reading class to create readings frm the Serial In
+enum SensorType
+{
+	IMU,
+	Ping
+};
 class Reading
 {
 public:
 	Reading();
-	Reading(string jsonInput);
+	Reading(string jsonInput, SensorType sensorType);
 	~Reading(void);
 
 	bool IsValidReading();
@@ -25,6 +28,7 @@ public:
 	double GetYa();
 	double GetPitch();
 	double GetRoll();
+	double GetPingDistance();
 	int GetArduinoId();
 	string GetErrorMessage();
 	void PrintReading();
@@ -45,7 +49,9 @@ private:
 	double _ya;
 	double _pitch;
 	double _roll;
+	double _pingDistance;
 	int _arduinoId;
 	string _errorMessage;
+	SensorType _sensorType;
 };
 

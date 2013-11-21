@@ -21,6 +21,13 @@ using namespace Numeric_lib;
 
 int main()
 {
+	Reader reader = Reader(9, Ping);
+	while(true)
+	{
+		Reading reading = reader.GetReading();
+		cout<<reading.GetPingDistance()<<endl;
+	}
+	/*
 	timeBeginPeriod(1);
 
 	Reader reader = Reader(11);
@@ -57,4 +64,5 @@ int main()
 	}
 
 	timeEndPeriod(1);
+	*/
 }

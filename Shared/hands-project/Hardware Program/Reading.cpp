@@ -3,8 +3,21 @@
 
 Reading::Reading(){}
 
-Reading::Reading(string jsonInput)
+Reading::Reading(string jsonInput, SensorType sensorType)
 {
+	_sensorType = sensorType;
+
+	_accelerationXAxis = 0;
+	_accelerationYAxis = 0;
+	_accelerationZAxis = 0;
+	_gyroXAxis = 0;
+	_gyroYAxis = 0;
+	_gyroZAxis = 0;
+	_ya = 0;
+	_pitch = 0;
+	_roll = 0;
+	_pingDistance = 0;
+
 	ValidateJson(jsonInput);
 }
 
@@ -74,18 +87,26 @@ void Reading::ValidateJson(string input)
 		TestString(",",input);
 		_roll = GetNextDouble(input);
 */
-	TestString("#A-C=",input);
-		_accelerationXAxis = GetNextDouble(input);
-		TestString(",",input);
-		_accelerationYAxis = GetNextDouble(input);
-		TestString(",",input);
-		_accelerationZAxis = GetNextDouble(input);
-	TestString("\r\n#G-C=",input);
-		_gyroXAxis = GetNextDouble(input);
-		TestString(",",input);
-		_gyroYAxis = GetNextDouble(input);
-		TestString(",",input);
-		_gyroZAxis = GetNextDouble(input);
+	if(_sensorType == IMU)
+	{
+		TestString("#A-C=",input);
+			_accelerationXAxis = GetNextDouble(input);
+			TestString(",",input);
+			_accelerationYAxis = GetNextDouble(input);
+			TestString(",",input);
+			_accelerationZAxis = GetNextDouble(input);
+		TestString("\r\n#G-C=",input);
+			_gyroXAxis = GetNextDouble(input);
+			TestString(",",input);
+			_gyroYAxis = GetNextDouble(input);
+			TestString(",",input);
+			_gyroZAxis = GetNextDouble(input);
+	}
+	else
+	{
+		_pingDistance = GetNextDouble(input);
+		TestString("\r\n",input);
+	}
 
 	_validReading = _errorMessage == "";
 }
@@ -164,4 +185,9 @@ double Reading::GetPitch()
 double Reading::GetRoll()
 {
 	return _roll;
+}
+
+double Reading::GetPingDistance()
+{
+	return _pingDistance;
 }
