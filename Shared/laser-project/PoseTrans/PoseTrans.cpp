@@ -18,8 +18,9 @@
 #include <vector>
 #include <sstream>
 #include <cstdlib>
-#include <GL/glut.h>
 #include <json/json.h>
+#include <cstdlib>
+#include <GL/glut.h>
 
 using namespace std;
 using namespace arma;
@@ -29,6 +30,7 @@ struct termios tty;
 struct termios tty_old;
 
 int USB; // holds tty port info for reading
+int depth = 0; // for idle animation function
 
 void sampleDataGenerator() {
 	// generate sample JSON data file (emulate serial data from microcontroller)
@@ -226,8 +228,34 @@ void poseTransSphere() {
 		newPose = pose * displacement;
 		spherePoseTrans.push_back(newPose);
 	}
+}
 
+vector<mat> cylinder;
+double radius = 2;
+void cylinderGenerator() {
+	
+	for (double z = 0.0; z <= 30; z = z + 0.25) {
+		for (double theta = 0.0; theta < 2 * 3.14159; theta += (3.14159/32)) {
 
+			if (z == 10.0 || z == 16.5)
+				radius = 2.5;
+			else if (z == 10.5 || z == 16.0)
+				radius = 3.0;
+			else if (z == 11.0 || z == 15.5)
+				radius = 3.5;
+			else if (z == 11.5 || z == 15.0)
+				radius = 4.0;
+			else if (z == 12.0)
+				radius = 4.5;
+			else if (z < 10.0 || z > 16.5) 
+				radius = 2;
+			mat point(3,1);
+			point(0,0) = radius * cos(theta);
+			point(1,0) = radius * sin(theta);
+			point(2,0) = z;
+			cylinder.push_back(point);
+		}
+	}
 }
 
 void serialPortSetup() {
@@ -298,8 +326,6 @@ void readfile(void){
 	ifstream ifs(sourcefile);
 	//Value jsonData;
 
-
-
   	Value PoseJSONobj;
   	Reader reader;
   	vector<Value> JSONobjsVector;
@@ -361,7 +387,7 @@ void display(void)
 	glRotatef((GLfloat) body, 0.0, 1.0, 0.0);
 	glPushMatrix();
 	glColor3f(0.5,0.5,0.5);
-	glScalef(4.0, 0.8, 2);
+	glScalef(1.0, 1, 1);
 	glutSolidCube(1.0);		
 	glPopMatrix();
 
@@ -369,32 +395,32 @@ void display(void)
 	glColor3f(0.0, 0.0, 0.0);
 	glBegin(GL_LINES);
 		glVertex3d(0.0, 0.0, 0.0);
-		glVertex3d(0.0, 50.0, 0.0);
+		glVertex3d(0.0, 10.0, 0.0);
 		glVertex3d(0.0, 0.0, 0.0);
-		glVertex3d(50.0, 0.0, 0.0);
+		glVertex3d(5.0, 0.0, 0.0);
 		glVertex3d(0.0, 0.0, 0.0);
-		glVertex3d(0.0, 0.0, 10.0);
+		glVertex3d(0.0, 0.0, 20.0);
 	glEnd();
 
 	// Start the point draw
 	glColor3f(0.0, 0.0, 1.0);
-	glPointSize(5.0);
+	glPointSize(2.0);
 	glBegin(GL_POINTS);
 	// Loop through the vector of point.
 	//for (vector<IMUdata>::iterator iter2=vectorData.begin(); iter2 !=vectorData.end(); ++iter2){
 	//	glVertex3f(double(iter2->x),double(iter2->y),double(iter2->z));
 	//}
-	for (int i = 0; i < sphere.size(); ++i) {
+	/*for (int i = 0; i < sphere.size(); ++i) {
 		double x = sphere[i](0,0);
 		double y = sphere[i](1,0);
 		double z = sphere[i](2,0);
 		glVertex3f(x,y,z);
-	}
+	}*/
 	glColor3f(1.0, 0.0, 0.0);
-	for (int i = 0; i < spherePoseTrans.size(); ++i) {
-		double x = spherePoseTrans[i](0,0);
-		double y = spherePoseTrans[i](1,0);
-		double z = spherePoseTrans[i](2,0);
+	for (int i = 0; i < depth; ++i) {
+		double x = cylinder[i](0,0);
+		double y = cylinder[i](1,0);
+		double z = cylinder[i](2,0);
 		glVertex3f(x,y,z);
 	}
 	// Finish drawing the points.
@@ -433,7 +459,13 @@ void keyboard (unsigned char key, int x, int y)
 		readfile();
 		glutPostRedisplay();
 		break;
+	case 'q':
+		depth=0;
+		glutPostRedisplay();
+		break;
 	}
+	
+
 }
 
 void mouse(int button, int state, int x, int y){
@@ -484,6 +516,32 @@ void motion(int x, int y){
 	glutPostRedisplay();
 }
 
+void timer(int i) {
+	if (i == spherePoseTrans.size()) {
+		return;
+	}
+	double x = spherePoseTrans[i](0,0);
+	double y = spherePoseTrans[i](1,0);
+	double z = spherePoseTrans[i](2,0);
+	glBegin(GL_POINTS);
+	glColor3f(1.0, 0.0, 0.0);
+	glVertex3f(x,y,z);
+	glEnd();
+	glutSwapBuffers();
+	glutPostRedisplay();
+	glutTimerFunc(1000, timer, i++);
+}
+
+void idleSleep() {
+	if (depth < cylinder.size()) {
+		depth++;
+		//sleep(1.0f/2.0f);
+
+		usleep(5000);
+		glutPostRedisplay();
+	}
+}
+
 // END OPENGL STUFF
 
 int main (int argc, char** argv) {
@@ -507,13 +565,14 @@ int main (int argc, char** argv) {
 	//sampleDataGenerator(); // generate sample data
 	generateSphere();
 	poseTransSphere();
-	//glutIdleFunc(readfile);
+	cylinderGenerator();
+	glutIdleFunc(idleSleep);
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
-	//glutTimerFunc(50,display,0);
+	glutTimerFunc(10, timer, 0);
 
 	// Enter the main loop -- control does not return from here, except at the
 	// end of the program.
