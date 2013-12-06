@@ -1,0 +1,171 @@
+
+% Needs circuit library.
+
+
+
+\begin{tikzpicture}[circuit ee IEC, tiny circuit symbols]
+
+  % The PGF macros below use the plain-TeX convention of the at-sign in command
+  % names.
+  \makeatletter
+                            
+  % Declare an NPN mosfet shape.
+  \pgfdeclareshape{npn-mosfet-basic-shape}
+  {
+    \savedanchor{\centerpoint}{%
+      \pgfpoint{0}{0}%
+    }
+
+    \anchor{center}{%
+      \centerpoint%
+    }
+
+    \anchor{gate}{%
+      \pgfpointadd{\centerpoint}{\pgfpointxy{-0.5}{0}}%
+    }
+
+    \anchor{drain}{%
+      \pgfpointadd{\centerpoint}{\pgfpointxy{0}{0.2}}%
+    }
+
+    \anchor{source}{%
+      \pgfpointadd{\centerpoint}{\pgfpointxy{0}{-0.2}}%
+    }
+
+    \anchor{input}{%
+        \pgfpointadd{\centerpoint}{\pgfpointxy{0}{0.2}}%
+    }
+
+    \anchor{output}{%
+        \pgfpointadd{\centerpoint}{\pgfpointxy{0}{-0.2}}%
+    }
+
+    \backgroundpath{%
+
+      % Move to the start of the gate line.
+      \pgfpathmoveto{\pgfpointxy{-0.5}{0}}
+      \pgfpathlineto{\pgfpointxy{-0.27}{0}}
+
+      \pgfpathmoveto{\pgfpointxy{-0.27}{0.17}}
+      \pgfpathlineto{\pgfpointxy{-0.27}{-0.17}}
+      
+      \pgfsetarrowsend{latex}
+      \pgfpathmoveto{\pgfpointxy{0}{0.2}}
+      \pgfpathlineto{\pgfpointxy{-0.22}{0.2}}
+      \pgfpathlineto{\pgfpointxy{-0.22}{-0.2}}
+      \pgfpathlineto{\pgfpointxy{0}{-0.2}}
+    }
+  }
+
+  % Declare a "voltage bar" shape.
+  \pgfdeclareshape{voltage-bar-shape}
+  {
+    \savedanchor{\centerpoint}{
+      \pgfpointxy{0}{0}
+    }
+ 
+    \anchor{center}{%
+      \centerpoint
+    }
+
+    \anchor{output}{%
+      \centerpoint
+    }
+    
+    \anchor{input}{%
+      \pgfpointxy{0}{0.05}
+    }
+ 
+    \backgroundpath{
+      \pgfpathmoveto{\pgfpointxy{-0.2}{0}}
+      \pgfpathlineto{\pgfpointxy{0.2}{0}}
+    }
+  }
+
+  % Declare an op-amp, inverting input below.
+  \pgfdeclareshape{op-amp-neg-down-shape}{
+
+    \savedanchor{\centerpoint}{
+      \pgfpointxy{0}{0}
+    }
+ 
+    \anchor{center}{%
+      \centerpoint
+    }
+
+    \anchor{output}{%
+      \pgfpointxy{1}{0}
+    }
+    
+    \anchor{non-inverting}{%
+      \pgfpointxy{-1}{0.3}
+    }
+
+    \anchor{inverting}{%
+      \pgfpointxy{-1}{-0.3}
+    }
+ 
+    \backgroundpath{
+      \pgfpathmoveto{\pgfpointxy{1}{0}}
+      \pgfpathlineto{\pgfpointxy{-1}{0.75}}
+      \pgfpathlineto{\pgfpointxy{-1}{-0.75}}
+      \pgfpathclose
+    }
+
+    \beforebackgroundpath{
+      {
+        \pgftransformshift{\pgfpointxy{-0.75}{0.3}}
+        \pgfnode{rectangle}{center}{$+$}{non-inverting-label}{}
+      }
+      
+      {
+        \pgftransformshift{\pgfpointxy{-0.75}{-0.3}}
+        \pgfnode{rectangle}{center}{$-$}{non-inverting-label}{}
+      }
+    }
+  }
+
+  \makeatother
+
+  \tikzset{
+    circuit declare symbol=npn-mosfet-basic,
+    set npn-mosfet-basic graphic={draw,shape=npn-mosfet-basic-shape,minimum size=5mm}
+  }
+
+  \tikzset{
+    circuit declare symbol=voltage-bar,
+    set voltage-bar graphic={draw,shape=voltage-bar-shape,minimum size=5mm}
+  }
+
+  \tikzset{
+    circuit declare symbol=op-amp-neg-down,
+    set op-amp-neg-down graphic={draw,shape=op-amp-neg-down-shape,minimum size=5mm}
+  }
+
+  % Place the driver mosfet
+  \node [npn-mosfet-basic] (driver-mosfet) at (5, 4) {};
+  
+  % Place the laser diode.
+  \draw (5,6) to [voltage-bar={at start, volt=5}, diode={midway, light emitting}] (driver-mosfet.drain);
+
+  % Place the current-sense junction
+  \node [contact] (current-sense-point) at (5, 3) {};
+
+  \draw (driver-mosfet.source) -- (current-sense-point);
+
+  \draw (current-sense-point) to [resistor={midway, info={$R_{cs}$}}, ground={at end}] ++(down:2cm);
+
+  % Place op-amp
+  \node [op-amp-neg-down] (amp) at (3, 4) {};
+
+  \draw (amp.output) -- (driver-mosfet.gate);
+
+  \node [contact] (feedback-point) at ($(amp.inverting)-(0.5,0)$) {};
+
+  \draw (amp.inverting) to (feedback-point) to (1.5,3) to [resistor={midway, info={$R_f$}}] (current-sense-point);
+
+  \draw (feedback-point) to [resistor={midway, info={$R_i$}}] ++(left:2cm);
+  
+  \draw (amp.non-inverting) to ++(left:0.5cm) to ++(up:1cm) to ++(left:0.5cm) to [ground=at end] ++(down:1cm);
+
+\end{tikzpicture}
