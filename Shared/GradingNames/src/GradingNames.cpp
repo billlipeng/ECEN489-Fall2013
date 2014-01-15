@@ -54,7 +54,7 @@ int main() {
 		ecen489names[number2] = name;
 	}
 
-	std::cout << endl << "Grading Assignment:" << endl << endl;
+	std::cout << endl << "== Graders for Assignment " << AssignmentNumber << " ==" << endl << endl;
 	for (unsigned int index=0; index < ecen489names.size(); ++index)
 	{
 		std::cout << "Grader: " << ecen489graders[index];
